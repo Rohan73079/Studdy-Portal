@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script defer src="../script.js"></script>
+    <link rel="stylesheet" href="../Police-Batches/Vinayak.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjects Navigation</title>
+  <style>
+     /* Small Notes Button */
+     .notes-button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 15px;
+      background: #d8d8d1;
+      color: rgb(0, 0, 0);
+      font-size: 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .notes-button:hover {
+      background: #e2ee5d;
+    }
+   
+  </style>
+</head>
+<body>
+    <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html"><h2>Study Portal</h2></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="https://rohan-dev-portfolio-pink.vercel.app/" target="_blank">About</a>
+      <a href="https://rohan-dev-portfolio-pink.vercel.app/contact.html" target="_blank">Contact</a>
+      <a href="Placementprep.html" target="_blank">Back</a>
+      <button id="theme-toggle">🌙</button>
+      <!-- <button class="back-button" onclick="location.href='../index.html'">⬅ Back</button> -->
+    </div>
+  </nav>
+    
+  <!-- Back Button -->
+ 
+<main>
+    <img class="banner" src="https://www.hireclap.com/blog/wp-content/uploads/2023/02/capture_20191030115853.png" alt="UPSI Banner">
+
+    <h1>Placement Preparation</h1>
+    <h2>Choose Your Subject</h2>
+  
+    <div class="button-container">
+      <!-- SQL -->
+      <div class="subject-card">
+        <div onclick="location.href='https://www.youtube.com/watch?v=hlGoQC332VM&t=103s'" style="cursor:pointer;">
+          <img src="https://i.ytimg.com/vi/hlGoQC332VM/maxresdefault.jpg" alt="SQL By Shraddha Khapra">
+          <p>SQL By Shraddha Khapra</p>
+        </div>
+        <!-- Notes Button -->
+        <a class="notes-button" href="https://drive.google.com/drive/folders/1OeHQaGTxgvBakJIbQ1QC9grO7WqDkPDg" target="_blank">📘 SQL Notes</a>
+      </div>
+  
+      <!-- OOPS -->
+      <div class="subject-card" onclick="location.href='https://www.youtube.com/watch?v=mlIUKyZIUUU'">
+        <img src="https://i.ytimg.com/vi/mlIUKyZIUUU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDeYOHnyCL7pDIOslbcp7yXXCiktA" alt="OOPS by Shraddha Khapra">
+        <p>OOPS by Shraddha Khapra</p>
+      </div>
+  
+      <!-- DSA -->
+      <div class="subject-card" onclick="location.href='https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt'">
+        <img src="https://i.ytimg.com/vi/VTLCoHnyACE/hqdefault.jpg" alt="Complete C++ DSA">
+        <p>Complete C++ DSA</p>
+      </div>
+  
+  
+      <!-- HTML -->
+      <div class="subject-card" onclick="location.href='https://www.youtube.com/watch?v=HcOc7P5BMi4'">
+        <img src="https://i.ytimg.com/vi/HcOc7P5BMi4/hqdefault.jpg" alt="Complete Html">
+        <p>Complete Html</p>
+      </div>
+  
+      <!-- Notes -->
+      <div class="subject-card" onclick="location.href='https://drive.google.com/drive/folders/1wfNTKinBAV6CCxaI5lfSnnRFAYpy0uEl'">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPN3EXan7dPuXfVnt5xJMhxGfrXbF-RewbLQ&s" alt="Notes">
+        <p>Notes By Shraddha Khapra</p>
+      </div>
+    </div>
+</main>
+
+</body>
+</html>

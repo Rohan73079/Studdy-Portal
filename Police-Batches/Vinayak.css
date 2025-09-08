@@ -1,0 +1,164 @@
+:root {
+    --bg: #f9fbe7;
+    --text: #333;
+    --card: #fff;
+    --primary: #4CAF50;
+  }
+  
+  body.dark {
+    --bg: #121212;
+    --text: #e0e0e0;
+    --card: #1e1e1e;
+    --primary: #81c784;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  /* ✅ Navbar */
+  .navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(33, 32, 32);
+    color: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+  
+  .navbar h2 {
+    color: #fff;
+    margin: 0;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s;
+  }
+  .navbar a:hover { opacity: 0.8; }
+  
+  /* ✅ Theme Toggle Button */
+  #theme-toggle {
+    margin-left: 20px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--primary);
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  #theme-toggle:hover { transform: rotate(20deg); }
+  
+  /* ✅ Content wrapper */
+  main {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  /* ✅ Banner */
+  .banner {
+    max-width: 50%;
+    height: auto;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  /* ✅ Headings */
+  h1 {
+    margin: 20px 0 10px;
+    font-size: 2rem;
+    color: var(--text);
+  }
+  h2 {
+    margin-bottom: 40px;
+    color: var(--text);
+    opacity: 0.8;
+  }
+  
+  /* ✅ Subject Cards */
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .subject-card {
+    background: var(--card);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgb(205, 143, 58);
+
+  }
+  
+  .subject-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 12px rgba(163, 156, 156, 0.381);
+    background: black;
+    color: #fff;
+  }
+  
+  .subject-card img {
+    width: 80%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .subject-card p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* ✅ Help Box */
+  .help-box {
+    margin-top: 50px;
+    text-align: center;
+  }
+  .help-box a {
+    display: inline-block;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+  }
+  .help-box a:hover {
+    background:  white;
+    color:#333 ;
+  }
+  
