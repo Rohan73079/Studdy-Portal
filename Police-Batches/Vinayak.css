@@ -27,18 +27,7 @@
   }
   
   /* ✅ Navbar */
-  .navbar {
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgb(33, 32, 32);
-    color: #fff;
-    padding: 15px 30px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1000;
-  }
+  
   
   .navbar h2 {
     color: #fff;
@@ -50,14 +39,37 @@
     align-items: center;
   }
   
+  .navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(33, 32, 32);
+    color: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  
   .navbar a {
     color: #fff;
     margin-left: 20px;
     text-decoration: none;
     font-weight: 600;
     transition: opacity 0.3s;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* smooth effect */
+  display: inline-block; /* important for transform */
   }
-  .navbar a:hover { opacity: 0.8; }
+  .navbar a:hover { opacity: 0.8;
+   color: rgb(255, 153, 0);
+   transform: scale(1.2); /* 1.2 = 20% zoom */
+   text-decoration: underline; /* underline */
+
+   text-underline-offset: 5px; /* thoda niche underline lagega */
+
+
+  }
+  
   
   /* ✅ Theme Toggle Button */
   #theme-toggle {
