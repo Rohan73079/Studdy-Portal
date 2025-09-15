@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Prep | Study Portal</title>
+  <script defer src="../script.js"></script>
+    <link rel="stylesheet" href="../Police-Batches/Vinayak.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+    /* Main Content */
+    .main-content-container {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    /* Playlist Section */
+    .playlist-section {
+      display: flex;
+      /* gap: 10px; */
+    }
+    
+    /* Playlist Sidebar */
+    /* Playlist Sidebar Full Height */
+.playlist-sidebar {
+  background-color: #352303;
+  color: #decbcb;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(194, 188, 188, 0.82);
+  width: 380px;
+
+  /* Full height panel */
+  position: fixed;     /* fixed on screen */
+  top: 63px;           /* navbar height */
+  bottom: 0;           /* touches footer */
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  border-right: 1px solid #eee;
+}
+    
+    /* Hide scrollbar */
+    .playlist-sidebar::-webkit-scrollbar {
+      display: none;
+    }
+
+    
+.playlist-sidebar ul::-webkit-scrollbar {
+  display: none;        /* Chrome, Safari */
+}
+    
+/* Make the list scrollable */
+.playlist-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* space between each video item */
+  overflow-y: auto;
+  flex: 1;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+    
+    .playlist-sidebar li {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-left: 5px solid #ffffff;
+      cursor: pointer;
+      background-color: #100a00;
+      transition: border-color 0.3s ease,  background-color 0.2s ease;
+      gap: 15px;
+      border-radius: 8px;
+      min-height: 180px;
+      min-width: 300px; 
+    }
+    
+    .playlist-sidebar li:hover {
+      background-color: #211b01;
+    }
+    
+    .video-thumbnail {
+      width: 180px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .video-number {
+  position: absolute;
+  left: 20px;
+  top: 10%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  font-size: 30px;
+  color: #ffffff;
+}
+    
+    .video-info {
+      flex: 1;
+    }
+    
+    .video-info h4 {
+      margin: 0 0 5px 0;
+      font-size: 16px;
+      color: #ffffff;
+    }
+    
+    .video-info p {
+      margin: 0;
+      font-size: 13px;
+      color: #eed4d4;
+    }
+    
+/* Default state – sidebar expanded */
+.video-player {
+  flex: 1;
+  /* margin-top: 20px; */
+  text-align: center;
+  margin-left: 300px;           /* space for sidebar */
+  transition: all 0.3s ease;    /* animate both margin + width */
+}
+
+.video-player iframe {
+  width: 100%;
+  max-width: 900px;             /* normal max width */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(223, 216, 216, 0.989);
+  transition: max-width 0.3s ease;
+}
+
+/* When sidebar is shrunk */
+.video-player.full-width {
+  margin-left: 60px;            /* smaller gap */
+}
+
+.video-player.full-width iframe {
+  max-width: 1200px;            /* let iframe grow wider */
+  transform: scale(1.05);         /* <— zoom effect */
+
+}
+
+    
+    /* Toggle Button */
+    .toggle-btn {
+      background-color: transparent;
+      color: #ffffff;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 50px;
+      transition: all 0.3s ease;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    
+    /* Shrunk Playlist */
+    .playlist-sidebar.shrunk-playlist {
+      width: 80px; /* only button visible */
+      /* top: 30%; */
+      right: 20px;
+      /* bottom: 50%; */
+      background-color: #000000 !important;
+      
+      
+       /* button must stay clickable */
+    }
+
+    .playlist-sidebar .playlist-header h2 {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.playlist-sidebar.shrunk-playlist .playlist-header h2 {
+  opacity: 0;
+  transform: translateX(-20px); /* thoda left me slide */
+}
+    
+    .playlist-sidebar.shrunk-playlist ul,
+.playlist-sidebar.shrunk-playlist .playlist-header h2 {
+  /* opacity: 0; */
+  /* visibility: hidden; */
+  align-items: left;
+  
+ 
+}
+.playlist-header h2{
+    color: #ffffff;
+}
+.playlist-sidebar.shrunk-playlist .toggle-btn {
+  transform: rotate(180deg);
+  right: 10px;
+  font-size: 100px;
+
+  
+}
+    /* Responsive: Desktop */
+    @media (min-width: 768px) {
+      .playlist-section {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    
+      .video-player {
+        margin-top: 0;
+      }
+    }
+    
+    /* Dark Mode */
+    body.dark .playlist-sidebar {
+      background-color: #222;
+      box-shadow: 0 4px 15px rgba(255,255,255,0.05);
+      transition:  0.3s;
+    }
+    
+    body.dark .playlist-sidebar li {
+        border-bottom: 2px solid #ffffff;
+    }
+    
+    body.dark .playlist-sidebar li:hover {
+      background-color: #333;
+    }
+    
+    body.dark .video-info h4 {
+      color: #ddd;
+    }
+    
+    body.dark .video-info p {
+      color: #aaa;
+    }
+    
+    body.dark .playlist-header h2 {
+      color: #ffffff;
+    }
+    
+    body.dark .toggle-btn {
+      color: #4da3ff;
+    }
+
+    ul li {
+  position: relative;
+}
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 0.4rem;
+      background-color: #333;
+      color: white;
+      margin: 0rem auto 0 auto; /* top 2rem, auto left/right */
+  max-width: 1200px;        /* control width */
+  border-radius: 10px;       /* optional: rounded corners */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* optional shadow */
+
+    }
+    .footer p {
+      margin: 0;
+    }
+
+/* Container for the search bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  margin: 30px auto;
+  position: absolute;
+  top: 5%;      /* Aligns the top edge 20px from the top of the window */
+  right: 20px;    /* Aligns the right edge 20px from the right of the window */
+  z-index: 0;
+  
+  width: 75%; /* Sets the width to 95% of its parent container */
+  max-width: 400px; /* Ensures the search box doesn't get too wide on large screens */
+  
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  padding: 8px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect for the search container */
+.search-container:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Search input field styling */
+#search-input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  padding: 5px 10px;
+  color: #333;
+  background-color: transparent;
+}
+
+/* Placeholder text styling */
+#search-input::placeholder {
+  color: #a0a0a0;
+  font-style: italic;
+}
+
+/* Focus effect for the search input */
+#search-input:focus {
+  border: none;
+}
+
+/* SVG icon styling */
+.search-icon {
+  width: 20px;
+  height: 20px;
+  fill: #757575;
+  margin-right: 10px;
+}
+
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+#video-list::-webkit-scrollbar {
+  width: 10px; /* Width of the scroll bar */
+}
+
+#video-list::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scroll bar track */
+}
+
+#video-list::-webkit-scrollbar-thumb {
+  background-color: #131212; /* Color of the scroll handle */
+  border-radius: 5px; /* Rounded corners for the handle */
+}
+
+/* For Firefox */
+#video-list {
+  scrollbar-width: thin; /* Makes the scroll bar thinner */
+  scrollbar-color: #f0eaea #151515; /* thumb color track color */
+}
+</style>    
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html"><h2>Study Portal</h2></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../Police-Batches/Police batches.html">Police</a>
+      <a href="../Mba/Mba.html">Mba</a>
+      <a href="coding.html" target="_blank">Back</a>
+      <button id="theme-toggle">🌙</button>
+    </div>
+  </nav>
+
+  <div class="search-container">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"/>
+    </svg>
+    
+    <input type="text" id="search-input" placeholder="Search for lectures by name or number...">
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>💼Dsa using C++ By Shraddha Khapra</h1>
+    <p>Ace your Dsa, Strong your concepts, with detailed lectures and easy access</p>
+  </header>
+
+  <!-- Content Section -->
+  <!-- <section class="button-container">
+    <button class="batch-btn" onclick="location.href='coding.html'">👨‍💻 Coding</button>
+    <button class="batch-btn" onclick="location.href='WebD.html'">👨‍💻 Web Development</button>
+    <button class="batch-btn">📊 Aptitude</button>
+    <button class="batch-btn" onclick="location.href='communication.html'">🗣 Communication</button>
+  </section> -->
+
+  <!-- YouTube Video and Playlist Section -->
+  <div class="main-content-container">
+    
+    <section class="playlist-section">
+      <div class="playlist-sidebar" id="playlist-sidebar">
+        <div class="playlist-header">
+          <h2>Course: C++ By Shraddha Khapra</h2>
+          <button id="togglePlaylistBtn" class="toggle-btn">«</button>
+        </div>
+        <ul id="video-list">
+            <li data-video-id="VTLCoHnyACE">
+              <div class="video-number">1</div>
+              <img src="https://img.youtube.com/vi/VTLCoHnyACE/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Lecture 1: Flowchart & Pseudocode + Installation</h4>
+                <p>Introduction to flowchart, pseudocode and installation process.</p>
+              </div>
+            </li>
+            <li data-video-id="Dxu7GKtdbnA">
+              <div class="video-number">2</div>
+              <img src="https://img.youtube.com/vi/Dxu7GKtdbnA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Lecture 2: Variable, Data Types & Operators</h4>
+                <p>Basics of variables, data types, and operators in C++.</p>
+              </div>
+            </li>
+            <li data-video-id="qR9U6bKxJ7g">
+              <div class="video-number">3</div>
+              <img src="https://img.youtube.com/vi/qR9U6bKxJ7g/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Lecture 3: Conditional Statements & Loops</h4>
+                <p>An introduction to if-else statements and loops.</p>
+              </div>
+            </li>
+            <li data-video-id="rga_q2N7vU8">
+              <div class="video-number">4</div>
+              <img src="https://img.youtube.com/vi/rga_q2N7vU8/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Lecture 4: Patterns in C++</h4>
+                <p>Printing different patterns using nested loops.</p>
+              </div>
+            </li>
+            <li data-video-id="P08Z_NC8GuY">
+              <div class="video-number">5</div>
+              <img src="https://img.youtube.com/vi/P08Z_NC8GuY/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Lecture 5: Functions in C++</h4>
+                <p>Defining and calling functions with arguments.</p>
+              </div>
+            </li>
+            <li data-video-id="xpy5NXiBFvA">
+              <div class="video-number">6</div>
+              <img src="https://img.youtube.com/vi/xpy5NXiBFvA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Binary Number System</h4>
+                <p>The fundamentals of the binary number system.</p>
+              </div>
+            </li>
+            <li data-video-id="r-u4uh3QvsQ">
+              <div class="video-number">7</div>
+              <img src="https://img.youtube.com/vi/r-u4uh3QvsQ/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Bitwise Operators, Data Type Modifiers & more</h4>
+                <p>An overview of bitwise operators and data type modifiers.</p>
+              </div>
+            </li>
+            <li data-video-id="8wmn7k1TTcI">
+              <div class="video-number">8</div>
+              <img src="https://img.youtube.com/vi/8wmn7k1TTcI/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Array Data Structure - Part1</h4>
+                <p>The basics of arrays and their operations.</p>
+              </div>
+            </li>
+            <li data-video-id="NWg38xWYzEg">
+              <div class="video-number">9</div>
+              <img src="https://img.youtube.com/vi/NWg38xWYzEg/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Vectors in C++ | Arrays Part 2 | Lecture 9</h4>
+                <p>An introduction to STL vectors and their syntax.</p>
+              </div>
+            </li>
+            <li data-video-id="9IZYqostl2M">
+              <div class="video-number">10</div>
+              <img src="https://img.youtube.com/vi/9IZYqostl2M/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Kadane's Algorithm | Maximum Subarray Sum</h4>
+                <p>Understanding Kadane's algorithm for finding maximum subarray sum.</p>
+              </div>
+            </li>
+            <li data-video-id="_xqIp2rj8bo">
+              <div class="video-number">11</div>
+              <img src="https://img.youtube.com/vi/_xqIp2rj8bo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Majority Element | Moore's Voting Algorithm</h4>
+                <p>Solving the Majority Element problem with Moore's Voting Algorithm.</p>
+              </div>
+            </li>
+            <li data-video-id="PwKv8fOcriM">
+              <div class="video-number">12</div>
+              <img src="https://img.youtube.com/vi/PwKv8fOcriM/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Time & Space Complexity</h4>
+                <p>A detailed explanation of time and space complexity in DSA.</p>
+              </div>
+            </li>
+            <li data-video-id="WBzZCm46mFo">
+              <div class="video-number">13</div>
+              <img src="https://img.youtube.com/vi/WBzZCm46mFo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Buy and Sell Stock Problem and Pow(X,N)</h4>
+                <p>Solutions for the "Buy and Sell Stock" and "Pow(X,N)" problems.</p>
+              </div>
+            </li>
+            <li data-video-id="EbkMABpP52U">
+              <div class="video-number">14</div>
+              <img src="https://img.youtube.com/vi/EbkMABpP52U/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Container with Most Water Problem</h4>
+                <p>Solving the "Container with Most Water" problem.</p>
+              </div>
+            </li>
+            <li data-video-id="TW2m8m_FNJE">
+              <div class="video-number">15</div>
+              <img src="https://img.youtube.com/vi/TW2m8m_FNJE/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Product of Array Except Self</h4>
+                <p>A solution for the "Product of Array Except Self" problem.</p>
+              </div>
+            </li>
+            <li data-video-id="qYEjR6M0wSk">
+              <div class="video-number">16</div>
+              <img src="https://img.youtube.com/vi/qYEjR6M0wSk/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Pointers in C++</h4>
+                <p>A detailed tutorial on pointers in C++.</p>
+              </div>
+            </li>
+            <li data-video-id="TbbSJrY5GqQ">
+              <div class="video-number">17</div>
+              <img src="https://img.youtube.com/vi/TbbSJrY5GqQ/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Binary Search Algorithm</h4>
+                <p>Iterative and recursive methods for binary search.</p>
+              </div>
+            </li>
+            <li data-video-id="6WNZQBHWQJs">
+              <div class="video-number">18</div>
+              <img src="https://img.youtube.com/vi/6WNZQBHWQJs/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Search in Rotated Sorted Array</h4>
+                <p>An algorithm for searching in a rotated sorted array.</p>
+              </div>
+            </li>
+            <li data-video-id="RjxD6UXGlhc">
+              <div class="video-number">19</div>
+              <img src="https://img.youtube.com/vi/RjxD6UXGlhc/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Peak Index in Mountain Array</h4>
+                <p>Solving the "Peak Index in Mountain Array" problem.</p>
+              </div>
+            </li>
+            <li data-video-id="qsbCBduIs40">
+              <div class="video-number">20</div>
+              <img src="https://img.youtube.com/vi/qsbCBduIs40/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Single Element in Sorted Array</h4>
+                <p>Finding the single element in a sorted array.</p>
+              </div>
+            </li>
+            <li data-video-id="JRAByolWqhw">
+              <div class="video-number">21</div>
+              <img src="https://img.youtube.com/vi/JRAByolWqhw/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Book Allocation or Allocate Books Problem</h4>
+                <p>Solving the Book Allocation problem using binary search.</p>
+              </div>
+            </li>
+            <li data-video-id="srsFN5OHBgw">
+              <div class="video-number">22</div>
+              <img src="https://img.youtube.com/vi/srsFN5OHBgw/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Painter's Partition Problem</h4>
+                <p>A solution for the Painter's Partition problem.</p>
+              </div>
+            </li>
+            <li data-video-id="7wOzDqsfXy0">
+              <div class="video-number">23</div>
+              <img src="https://img.youtube.com/vi/7wOzDqsfXy0/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Aggressive Cows Problem</h4>
+                <p>Solving the Aggressive Cows problem.</p>
+              </div>
+            </li>
+            <li data-video-id="1jCFUv-Xlqo">
+              <div class="video-number">24</div>
+              <img src="https://img.youtube.com/vi/1jCFUv-Xlqo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Sorting Algorithms</h4>
+                <p>An introduction to Bubble, Selection, and Insertion Sort.</p>
+              </div>
+            </li>
+            <li data-video-id="J48aGjfjYTI">
+              <div class="video-number">25</div>
+              <img src="https://img.youtube.com/vi/J48aGjfjYTI/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Sort an Array of 0s, 1s & 2s</h4>
+                <p>Solving the problem of sorting an array of 0s, 1s, and 2s.</p>
+              </div>
+            </li>
+            <li data-video-id="-1cLK6PaLsQ">
+              <div class="video-number">26</div>
+              <img src="https://img.youtube.com/vi/-1cLK6PaLsQ/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Merge Sorted Arrays Problem and Next Permutation Problem</h4>
+                <p>Solutions for merging sorted arrays and finding the next permutation.</p>
+              </div>
+            </li>
+            <li data-video-id="okhdtEk1iKk">
+              <div class="video-number">27</div>
+              <img src="https://img.youtube.com/vi/okhdtEk1iKk/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>C++ STL Complete Tutorial</h4>
+                <p>A comprehensive tutorial on the Standard Template Library (STL).</p>
+              </div>
+            </li>
+            <li data-video-id="varXreLWPRo">
+              <div class="video-number">28</div>
+              <img src="https://img.youtube.com/vi/varXreLWPRo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>How to setup C++ compiler on Mac ?</h4>
+                <p>Instructions for setting up a C++ compiler on a Mac.</p>
+              </div>
+            </li>
+            <li data-video-id="MOSjYaVymcU">
+              <div class="video-number">29</div>
+              <img src="https://img.youtube.com/vi/MOSjYaVymcU/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Strings & Character Arrays in C++ - Part 1</h4>
+                <p>An introduction to strings and character arrays in C++.</p>
+              </div>
+            </li>
+            <li data-video-id="dSRFgEs3a6A">
+              <div class="video-number">30</div>
+              <img src="https://img.youtube.com/vi/dSRFgEs3a6A/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Valid Palindrome & Remove all Occurrences</h4>
+                <p>Identifying valid palindromes and removing all occurrences of a character.</p>
+              </div>
+            </li>
+            <li data-video-id="VXewy91P0S4">
+              <div class="video-number">31</div>
+              <img src="https://img.youtube.com/vi/VXewy91P0S4/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Strings - Part 3 | Permutation in String</h4>
+                <p>Solving the "Permutation in String" problem.</p>
+              </div>
+            </li>
+            <li data-video-id="RitppzIdMCo">
+              <div class="video-number">32</div>
+              <img src="https://img.youtube.com/vi/RitppzIdMCo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Strings - Part 4 | Reverse Words in String</h4>
+                <p>An algorithm for reversing words in a string.</p>
+              </div>
+            </li>
+            <li data-video-id="cAB15h6-sWA">
+              <div class="video-number">33</div>
+              <img src="https://img.youtube.com/vi/cAB15h6-sWA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>String Compression problem</h4>
+                <p>Solving the string compression problem.</p>
+              </div>
+            </li>
+            <li data-video-id="Y4KdgqV1IqA">
+              <div class="video-number">34</div>
+              <img src="https://img.youtube.com/vi/Y4KdgqV1IqA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Maths for DSA - One Shot</h4>
+                <p>Mathematical concepts for DSA, including Euclid's Algorithm.</p>
+              </div>
+            </li>
+            <li data-video-id="lBL8327gq8I">
+              <div class="video-number">35</div>
+              <img src="https://img.youtube.com/vi/lBL8327gq8I/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>2D Arrays in C++ | Part 1</h4>
+                <p>An introduction to 2D arrays in C++.</p>
+              </div>
+            </li>
+            <li data-video-id="LEFFjgt5i6w">
+              <div class="video-number">36</div>
+              <img src="https://img.youtube.com/vi/LEFFjgt5i6w/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Search a 2D Matrix</h4>
+                <p>An algorithm to search a 2D matrix.</p>
+              </div>
+            </li>
+            <li data-video-id="XMpdvwUObho">
+              <div class="video-number">37</div>
+              <img src="https://img.youtube.com/vi/XMpdvwUObho/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Spiral Matrix</h4>
+                <p>How to print a 2D matrix in spiral form.</p>
+              </div>
+            </li>
+            <li data-video-id="0Fxc_jKj2vo">
+              <div class="video-number">38</div>
+              <img src="https://img.youtube.com/vi/0Fxc_jKj2vo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Two Sum | Find Duplicate | Hashing Problems</h4>
+                <p>Solutions for hashing-related problems like Two Sum.</p>
+              </div>
+            </li>
+            <li data-video-id="K-RsltkN63w">
+              <div class="video-number">39</div>
+              <img src="https://img.youtube.com/vi/K-RsltkN63w/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>3 Sum | Brute, Better & Optimized Approach</h4>
+                <p>Solutions for the 3 Sum problem.</p>
+              </div>
+            </li>
+            <li data-video-id="X6sL8JTROLY">
+              <div class="video-number">40</div>
+              <img src="https://img.youtube.com/vi/X6sL8JTROLY/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>4 Sum Problem</h4>
+                <p>The optimal approach for the 4 Sum problem.</p>
+              </div>
+            </li>
+            <li data-video-id="KDH4mhFVvHw">
+              <div class="video-number">41</div>
+              <img src="https://img.youtube.com/vi/KDH4mhFVvHw/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Subarray Sum Equals K</h4>
+                <p>Solving the Subarray Sum Equals K problem.</p>
+              </div>
+            </li>
+            <li data-video-id="9OsMG4fI4OY">
+              <div class="video-number">42</div>
+              <img src="https://img.youtube.com/vi/9OsMG4fI4OY/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Recursion Tutorial - Basics to Advanced | Part 1</h4>
+                <p>The basics of recursion.</p>
+              </div>
+            </li>
+            <li data-video-id="4iT-GhvSKzc">
+              <div class="video-number">43</div>
+              <img src="https://img.youtube.com/vi/4iT-GhvSKzc/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Recursion Part 2</h4>
+                <p>Solving Fibonacci and binary search problems with recursion.</p>
+              </div>
+            </li>
+            <li data-video-id="pNzljlzDCiI">
+              <div class="video-number">44</div>
+              <img src="https://img.youtube.com/vi/pNzljlzDCiI/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Recursion Part 3 : Backtracking in Detail</h4>
+                <p>A detailed look at backtracking and printing all subsets.</p>
+              </div>
+            </li>
+            <li data-video-id="N4gJDGdhpLw">
+              <div class="video-number">45</div>
+              <img src="https://img.youtube.com/vi/N4gJDGdhpLw/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Permutations of an Array/String</h4>
+                <p>Finding permutations of an array or string.</p>
+              </div>
+            </li>
+            <li data-video-id="BdSJnIdR-4s">
+              <div class="video-number">46</div>
+              <img src="https://img.youtube.com/vi/BdSJnIdR-4s/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>N-Queens Problem</h4>
+                <p>Solving the N-Queens problem using backtracking.</p>
+              </div>
+            </li>
+            <li data-video-id="70cP3qtJp-s">
+              <div class="video-number">47</div>
+              <img src="https://img.youtube.com/vi/70cP3qtJp-s/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Sudoku Solver Problem</h4>
+                <p>Solving the Sudoku Solver problem with backtracking.</p>
+              </div>
+            </li>
+            <li data-video-id="D8Yze9CDDAw">
+              <div class="video-number">48</div>
+              <img src="https://img.youtube.com/vi/D8Yze9CDDAw/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Rat in a Maze Problem</h4>
+                <p>Solving the Rat in a Maze problem.</p>
+              </div>
+            </li>
+            <li data-video-id="jkgZw2WEaqA">
+              <div class="video-number">49</div>
+              <img src="https://img.youtube.com/vi/jkgZw2WEaqA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Combination Sum Problem</h4>
+                <p>A solution to the Combination Sum problem.</p>
+              </div>
+            </li>
+            <li data-video-id="aZ0B1eWkSVU">
+              <div class="video-number">50</div>
+              <img src="https://img.youtube.com/vi/aZ0B1eWkSVU/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Palindrome Partitioning Problem</h4>
+                <p>Solving the Palindrome Partitioning problem.</p>
+              </div>
+            </li>
+            <li data-video-id="cQDtOBTy7_Y">
+              <div class="video-number">51</div>
+              <img src="https://img.youtube.com/vi/cQDtOBTy7_Y/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Merge Sort Algorithm</h4>
+                <p>A detailed explanation of the Merge Sort algorithm.</p>
+              </div>
+            </li>
+            <li data-video-id="SBQfXK7q5K4">
+              <div class="video-number">52</div>
+              <img src="https://img.youtube.com/vi/SBQfXK7q5K4/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>One Major update & reaching 1000M views</h4>
+                <p>An update and a milestone message.</p>
+              </div>
+            </li>
+            <li data-video-id="8MNB0Mba_Dc">
+              <div class="video-number">53</div>
+              <img src="https://img.youtube.com/vi/8MNB0Mba_Dc/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Quick Sort Algorithm</h4>
+                <p>An in-depth look at the Quick Sort algorithm.</p>
+              </div>
+            </li>
+            <li data-video-id="ynnWDBTdVi0">
+              <div class="video-number">54</div>
+              <img src="https://img.youtube.com/vi/ynnWDBTdVi0/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Count Inversions Problem</h4>
+                <p>An algorithm to count inversions in an array.</p>
+              </div>
+            </li>
+            <li data-video-id="Sp1jzttFVdE">
+              <div class="video-number">55</div>
+              <img src="https://img.youtube.com/vi/Sp1jzttFVdE/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>KNIGHTS TOUR Problem</h4>
+                <p>A solution for the Knights Tour problem using backtracking.</p>
+              </div>
+            </li>
+            <li data-video-id="mlIUKyZIUUU">
+              <div class="video-number">56</div>
+              <img src="https://img.youtube.com/vi/mlIUKyZIUUU/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>OOPs Tutorial in One Shot</h4>
+                <p>A one-shot tutorial on Object-Oriented Programming (OOPs).</p>
+              </div>
+            </li>
+            <li data-video-id="LyuuqCVkP5I">
+              <div class="video-number">57</div>
+              <img src="https://img.youtube.com/vi/LyuuqCVkP5I/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Introduction to Linked List</h4>
+                <p>An introduction to linked lists as a data structure.</p>
+              </div>
+            </li>
+            <li data-video-id="R-CKBYnOv1U">
+              <div class="video-number">58</div>
+              <img src="https://img.youtube.com/vi/R-CKBYnOv1U/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Reverse a Linked List</h4>
+                <p>An algorithm to reverse a linked list.</p>
+              </div>
+            </li>
+            <li data-video-id="nzaHG0dme4g">
+              <div class="video-number">59</div>
+              <img src="https://img.youtube.com/vi/nzaHG0dme4g/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Middle of a Linked List</h4>
+                <p>Finding the middle node of a linked list.</p>
+              </div>
+            </li>
+            <li data-video-id="-1E8ZMS0gSs">
+              <div class="video-number">60</div>
+              <img src="https://img.youtube.com/vi/-1E8ZMS0gSs/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Detect & Remove Cycle in Linked List</h4>
+                <p>How to detect and remove a cycle in a linked list.</p>
+              </div>
+            </li>
+            <li data-video-id="f8RPIb-0DDE">
+              <div class="video-number">61</div>
+              <img src="https://img.youtube.com/vi/f8RPIb-0DDE/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Merge Two Sorted Lists</h4>
+                <p>An algorithm for merging two sorted linked lists.</p>
+              </div>
+            </li>
+            <li data-video-id="8ze7Zopdsaw">
+              <div class="video-number">62</div>
+              <img src="https://img.youtube.com/vi/8ze7Zopdsaw/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Copy List with Random Pointer</h4>
+                <p>Solving the "Copy List with Random Pointer" problem.</p>
+              </div>
+            </li>
+            <li data-video-id="bO5DasTsaRQ">
+              <div class="video-number">63</div>
+              <img src="https://img.youtube.com/vi/bO5DasTsaRQ/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Doubly Linked List Tutorial</h4>
+                <p>A tutorial on doubly linked lists.</p>
+              </div>
+            </li>
+            <li data-video-id="e6lZY5Yha8U">
+              <div class="video-number">64</div>
+              <img src="https://img.youtube.com/vi/e6lZY5Yha8U/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Circular Linked List in Data Structures</h4>
+                <p>An introduction to circular linked lists.</p>
+              </div>
+            </li>
+            <li data-video-id="I8b0rff5F9M">
+              <div class="video-number">65</div>
+              <img src="https://img.youtube.com/vi/I8b0rff5F9M/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Flatten a Doubly Linked List</h4>
+                <p>How to flatten a doubly linked list.</p>
+              </div>
+            </li>
+            <li data-video-id="-swgIiMIlJo">
+              <div class="video-number">66</div>
+              <img src="https://img.youtube.com/vi/-swgIiMIlJo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Reverse Nodes in K-Group</h4>
+                <p>An algorithm for reversing nodes in k-groups.</p>
+              </div>
+            </li>
+            <li data-video-id="wwbTMNVlFHQ">
+              <div class="video-number">67</div>
+              <img src="https://img.youtube.com/vi/wwbTMNVlFHQ/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Swap Nodes in Pairs</h4>
+                <p>An algorithm for swapping nodes in pairs.</p>
+              </div>
+            </li>
+            <li data-video-id="0X-fV-1ir9c">
+              <div class="video-number">68</div>
+              <img src="https://img.youtube.com/vi/0X-fV-1ir9c/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Introduction to STACKS</h4>
+                <p>The basics of the stack data structure.</p>
+              </div>
+            </li>
+            <li data-video-id="NlHupEeDXzY">
+              <div class="video-number">69</div>
+              <img src="https://img.youtube.com/vi/NlHupEeDXzY/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Valid Parentheses | Stack</h4>
+                <p>Solving the Valid Parentheses problem using a stack.</p>
+              </div>
+            </li>
+            <li data-video-id="01vBuZyMfqk">
+              <div class="video-number">70</div>
+              <img src="https://img.youtube.com/vi/01vBuZyMfqk/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Stock Span Problem</h4>
+                <p>An optimal solution for the Stock Span problem.</p>
+              </div>
+            </li>
+            <li data-video-id="NKbExYwvjb0">
+              <div class="video-number">71</div>
+              <img src="https://img.youtube.com/vi/NKbExYwvjb0/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Next Greater Element</h4>
+                <p>An optimal solution for the Next Greater Element problem.</p>
+              </div>
+            </li>
+            <li data-video-id="WnjUfBn9nZM">
+              <div class="video-number">72</div>
+              <img src="https://img.youtube.com/vi/WnjUfBn9nZM/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Previous Smaller Element</h4>
+                <p>An optimal solution for the Previous Smaller Element problem.</p>
+              </div>
+            </li>
+            <li data-video-id="wHDm-N2m2XY">
+              <div class="video-number">73</div>
+              <img src="https://img.youtube.com/vi/wHDm-N2m2XY/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Design a Min Stack</h4>
+                <p>How to design a stack that retrieves the minimum element in constant time.</p>
+              </div>
+            </li>
+            <li data-video-id="ysy1o-QEj3k">
+              <div class="video-number">74</div>
+              <img src="https://img.youtube.com/vi/ysy1o-QEj3k/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Largest Rectangle in Histogram</h4>
+                <p>Finding the largest rectangle in a histogram with an optimal solution.</p>
+              </div>
+            </li>
+            <li data-video-id="If--3pm9K3U">
+              <div class="video-number">75</div>
+              <img src="https://img.youtube.com/vi/If--3pm9K3U/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L73. Next Greater Element - II | Stack & Queue</h4>
+                <p>A solution for the Next Greater Element II problem.</p>
+              </div>
+            </li>
+            <li data-video-id="UHHp8USwx4M">
+              <div class="video-number">76</div>
+              <img src="https://img.youtube.com/vi/UHHp8USwx4M/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L74. Trapping Rainwater Problem</h4>
+                <p>An optimal solution for the Trapping Rainwater problem.</p>
+              </div>
+            </li>
+            <li data-video-id="OZPmEA_8FM8">
+              <div class="video-number">77</div>
+              <img src="https://img.youtube.com/vi/OZPmEA_8FM8/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L75. The Celebrity Problem | Stack & Queue</h4>
+                <p>Solving the Celebrity problem.</p>
+              </div>
+            </li>
+            <li data-video-id="GsY6y0iPaHw">
+              <div class="video-number">78</div>
+              <img src="https://img.youtube.com/vi/GsY6y0iPaHw/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L76. Implement LRU Cache | Linked List</h4>
+                <p>Implementing an LRU Cache using a linked list.</p>
+              </div>
+            </li>
+            <li data-video-id="Khf9v67Ya30">
+              <div class="video-number">79</div>
+              <img src="https://img.youtube.com/vi/Khf9v67Ya30/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>New Chapter : Queue Data Structure</h4>
+                <p>An introduction to the queue data structure.</p>
+              </div>
+            </li>
+            <li data-video-id="4mKKolshFD0">
+              <div class="video-number">80</div>
+              <img src="https://img.youtube.com/vi/4mKKolshFD0/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L78. Circular Queue in Data Strucuture</h4>
+                <p>An explanation of the circular queue.</p>
+              </div>
+            </li>
+            <li data-video-id="sFvP5Ois0CE">
+              <div class="video-number">81</div>
+              <img src="https://img.youtube.com/vi/sFvP5Ois0CE/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L79. Implement Queue using Stack & Stack using Queue</h4>
+                <p>How to implement a queue using a stack, and vice versa.</p>
+              </div>
+            </li>
+            <li data-video-id="sqyCBvEQN9c">
+              <div class="video-number">82</div>
+              <img src="https://img.youtube.com/vi/sqyCBvEQN9c/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L80. First Unique Character in String</h4>
+                <p>Finding the first unique character in a string.</p>
+              </div>
+            </li>
+            <li data-video-id="XwG5cozqfaM">
+              <div class="video-number">83</div>
+              <img src="https://img.youtube.com/vi/XwG5cozqfaM/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L81. Sliding Window Maximum</h4>
+                <p>A solution for the Sliding Window Maximum problem.</p>
+              </div>
+            </li>
+            <li data-video-id="SmTow5Ht4iU">
+              <div class="video-number">84</div>
+              <img src="https://img.youtube.com/vi/SmTow5Ht4iU/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L82. Gas Station | Greedy Approach</h4>
+                <p>Solving the Gas Station problem with a greedy approach.</p>
+              </div>
+            </li>
+            <li data-video-id="eKJrXBCRuNQ">
+              <div class="video-number">85</div>
+              <img src="https://img.youtube.com/vi/eKJrXBCRuNQ/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Binary Trees in Data Structures</h4>
+                <p>An introduction to binary trees and tree traversal.</p>
+              </div>
+            </li>
+            <li data-video-id="7tzHzN_Ehus">
+              <div class="video-number">86</div>
+              <img src="https://img.youtube.com/vi/7tzHzN_Ehus/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L.84 Height of a Binary Tree | Count of Nodes</h4>
+                <p>How to find the height of a binary tree and count its nodes.</p>
+              </div>
+            </li>
+            <li data-video-id="tumW7jsjv68">
+              <div class="video-number">87</div>
+              <img src="https://img.youtube.com/vi/tumW7jsjv68/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L.85 Identical Tree (same tree) | Subtree of another Tree</h4>
+                <p>Determining if two trees are identical or if one is a subtree of another.</p>
+              </div>
+            </li>
+            <li data-video-id="aPyDPImR5UM">
+              <div class="video-number">88</div>
+              <img src="https://img.youtube.com/vi/aPyDPImR5UM/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>L.86 Diameter of Binary Tree</h4>
+                <p>How to find the diameter of a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="FGr-syrhvOA">
+              <div class="video-number">89</div>
+              <img src="https://img.youtube.com/vi/FGr-syrhvOA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Top View of a Binary Tree | L.87</h4>
+                <p>An algorithm to find the top view of a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="ze4JO_ODl3w">
+              <div class="video-number">90</div>
+              <img src="https://img.youtube.com/vi/ze4JO_ODl3w/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Kth Level of a Binary Tree | L.88</h4>
+                <p>Finding the Kth level of a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="oX5D0uKOMck">
+              <div class="video-number">91</div>
+              <img src="https://img.youtube.com/vi/oX5D0uKOMck/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Lowest Common Ancestor in Binary Tree | L.89</h4>
+                <p>Finding the lowest common ancestor in a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="33b1M980cCA">
+              <div class="video-number">92</div>
+              <img src="https://img.youtube.com/vi/33b1M980cCA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Build Tree from Preorder & Inorder | L.90</h4>
+                <p>How to build a tree from preorder and inorder traversals.</p>
+              </div>
+            </li>
+            <li data-video-id="TY6kEejJEM0">
+              <div class="video-number">93</div>
+              <img src="https://img.youtube.com/vi/TY6kEejJEM0/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Transform to Sum Tree | L.91</h4>
+                <p>Transforming a binary tree into a sum tree.</p>
+              </div>
+            </li>
+            <li data-video-id="AWJD__CfM6A">
+              <div class="video-number">94</div>
+              <img src="https://img.youtube.com/vi/AWJD__CfM6A/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Binary Tree Paths | L.92</h4>
+                <p>Finding and listing all root-to-leaf paths in a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="rhz-csskg_A">
+              <div class="video-number">95</div>
+              <img src="https://img.youtube.com/vi/rhz-csskg_A/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Maximum Width of Binary Tree | L.93</h4>
+                <p>Finding the maximum width of a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="PUfADhkq1LI">
+              <div class="video-number">96</div>
+              <img src="https://img.youtube.com/vi/PUfADhkq1LI/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Morris Inorder Traversal | L.94</h4>
+                <p>An explanation of Morris Inorder Traversal without recursion or stack.</p>
+              </div>
+            </li>
+            <li data-video-id="dU2Z5HWSGM0">
+              <div class="video-number">97</div>
+              <img src="https://img.youtube.com/vi/dU2Z5HWSGM0/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Flatten Binary Tree to Linked List | L.95</h4>
+                <p>How to flatten a binary tree into a linked list.</p>
+              </div>
+            </li>
+            <li data-video-id="RuF7dPfj27Q">
+              <div class="video-number">98</div>
+              <img src="https://img.youtube.com/vi/RuF7dPfj27Q/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Binary Search Trees (BSTs) | L.96</h4>
+                <p>An introduction to Binary Search Trees (BSTs).</p>
+              </div>
+            </li>
+            <li data-video-id="0s6sCjs_4g0">
+              <div class="video-number">99</div>
+              <img src="https://img.youtube.com/vi/0s6sCjs_4g0/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Sorted Array to Balanced BST | L.97</h4>
+                <p>Building a balanced BST from a sorted array.</p>
+              </div>
+            </li>
+            <li data-video-id="dSBcCynP1nA">
+              <div class="video-number">100</div>
+              <img src="https://img.youtube.com/vi/dSBcCynP1nA/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Validate Binary Search Tree | L.98</h4>
+                <p>How to validate if a tree is a valid BST.</p>
+              </div>
+            </li>
+            <li data-video-id="WZmjRXF_Zi4">
+              <div class="video-number">101</div>
+              <img src="https://img.youtube.com/vi/WZmjRXF_Zi4/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Min Distance between BST Nodes | L.99</h4>
+                <p>Finding the minimum distance between any two nodes in a BST.</p>
+              </div>
+            </li>
+            <li data-video-id="Kq4BbvIhj44">
+              <div class="video-number">102</div>
+              <img src="https://img.youtube.com/vi/Kq4BbvIhj44/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Kth Smallest in BST | L.100</h4>
+                <p>Finding the Kth smallest element in a BST.</p>
+              </div>
+            </li>
+            <li data-video-id="ORxkZ12FrU4">
+              <div class="video-number">103</div>
+              <img src="https://img.youtube.com/vi/ORxkZ12FrU4/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Lowest Common Ancestor in BST | L.101</h4>
+                <p>Finding the lowest common ancestor in a BST.</p>
+              </div>
+            </li>
+            <li data-video-id="-n5Ur1wE5Jc">
+              <div class="video-number">104</div>
+              <img src="https://img.youtube.com/vi/-n5Ur1wE5Jc/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Construct BST from Preorder | L.102</h4>
+                <p>Building a BST from its preorder traversal.</p>
+              </div>
+            </li>
+            <li data-video-id="AiKZjCuy2k4">
+              <div class="video-number">105</div>
+              <img src="https://img.youtube.com/vi/AiKZjCuy2k4/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Merge Two Binary Search Trees | L.103</h4>
+                <p>Merging two binary search trees into a single one.</p>
+              </div>
+            </li>
+            <li data-video-id="0KGzfij_SCk">
+              <div class="video-number">106</div>
+              <img src="https://img.youtube.com/vi/0KGzfij_SCk/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Recover BST | L.104</h4>
+                <p>How to recover a BST that has two swapped nodes.</p>
+              </div>
+            </li>
+            <li data-video-id="Pr-HFxp7npk">
+              <div class="video-number">107</div>
+              <img src="https://img.youtube.com/vi/Pr-HFxp7npk/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Largest BST in Binary Tree | L.105</h4>
+                <p>Finding the largest BST within a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="a8VKpW1DsD8">
+              <div class="video-number">108</div>
+              <img src="https://img.youtube.com/vi/a8VKpW1DsD8/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Populate Next Right Pointers in Each Node | L.106</h4>
+                <p>How to populate next right pointers in a binary tree.</p>
+              </div>
+            </li>
+            <li data-video-id="dS1bKglre3A">
+              <div class="video-number">109</div>
+              <img src="https://img.youtube.com/vi/dS1bKglre3A/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>BST Iterator | L.107</h4>
+                <p>Implementing a BST iterator.</p>
+              </div>
+            </li>
+            <li data-video-id="IHNkql1tAnk">
+              <div class="video-number">110</div>
+              <img src="https://img.youtube.com/vi/IHNkql1tAnk/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Inorder Predecessor & Successor in BST | L.108</h4>
+                <p>Finding the inorder predecessor and successor in a BST.</p>
+              </div>
+            </li>
+            <li data-video-id="RpgyCJBbl5E">
+              <div class="video-number">111</div>
+              <img src="https://img.youtube.com/vi/RpgyCJBbl5E/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Introduction to Graphs</h4>
+                <p>An introduction to graph data structures.</p>
+              </div>
+            </li>
+            <li data-video-id="scQITTLgFJo">
+              <div class="video-number">112</div>
+              <img src="https://img.youtube.com/vi/scQITTLgFJo/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>BFS Traversal in Graphs</h4>
+                <p>An explanation of Breadth-First Search (BFS) traversal.</p>
+              </div>
+            </li>
+            <li data-video-id="3czYbhac160">
+              <div class="video-number">113</div>
+              <img src="https://img.youtube.com/vi/3czYbhac160/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>DFS Traversal in Graphs</h4>
+                <p>An explanation of Depth-First Search (DFS) traversal.</p>
+              </div>
+            </li>
+            <li data-video-id="OZClCpPQDR4">
+              <div class="video-number">114</div>
+              <img src="https://img.youtube.com/vi/OZClCpPQDR4/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Detect a Cycle in Undirected Graph using DFS</h4>
+                <p>How to detect a cycle in an undirected graph using DFS.</p>
+              </div>
+            </li>
+            <li data-video-id="MIjOkApZ39g">
+              <div class="video-number">115</div>
+              <img src="https://img.youtube.com/vi/MIjOkApZ39g/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Detect a Cycle in Undirected Graph using BFS</h4>
+                <p>How to detect a cycle in an undirected graph using BFS.</p>
+              </div>
+            </li>
+            <li data-video-id="AME6baBpswY">
+              <div class="video-number">116</div>
+              <img src="https://img.youtube.com/vi/AME6baBpswY/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Number of Islands | Connected Components in Matrix</h4>
+                <p>A solution for the Number of Islands problem.</p>
+              </div>
+            </li>
+          </ul>
+          
+      </div>
+
+      <div class="video-player" id="video-player-container">
+        <h2>Watch Video</h2>
+        <!-- Initial video player will be loaded here by JavaScript -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Study Portal | Designed by Rohan Kumar</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const playlistItems = document.querySelectorAll('.playlist-sidebar li');
+      const videoPlayerContainer = document.getElementById('video-player-container');
+      const playlistSidebar = document.getElementById('playlist-sidebar');
+      const toggleBtn = document.getElementById('togglePlaylistBtn');
+
+      const playVideo = (videoId) => {
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('width', '150%');
+        iframe.setAttribute('height', '600'); 
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+        iframe.setAttribute('title', 'YouTube video player');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+
+        videoPlayerContainer.innerHTML = '';
+        videoPlayerContainer.appendChild(iframe);
+      };
+
+      const togglePlaylist = () => {
+        const isShrunk = playlistSidebar.classList.toggle('shrunk-playlist');
+        videoPlayerContainer.classList.toggle('full-width', isShrunk);
+
+        toggleBtn.textContent = isShrunk ? '«' : '«';
+      };
+
+      toggleBtn.addEventListener('click', togglePlaylist);
+
+      playlistItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const videoId = item.dataset.videoId;
+          playVideo(videoId);
+          
+        });
+      });
+
+      if (playlistItems.length > 0) {
+        const firstVideoId = playlistItems[0].dataset.videoId;
+        playVideo(firstVideoId);
+      }
+      
+
+      
+    });
+
+    document.getElementById('search-input').addEventListener('keyup', function() {
+  let filter = this.value.toLowerCase();
+  let videoList = document.getElementById('video-list');
+  let videos = videoList.getElementsByTagName('li');
+
+  for (let i = 0; i < videos.length; i++) {
+    let videoInfo = videos[i].getElementsByTagName('h4')[0];
+    let videoNumber = videos[i].querySelector('.video-number');
+
+    if (videoInfo || videoNumber) {
+      let titleText = videoInfo.textContent.toLowerCase();
+      let numberText = videoNumber ? videoNumber.textContent.toLowerCase() : '';
+      
+      if (titleText.includes(filter) || numberText.includes(filter)) {
+        videos[i].style.display = '';
+      } else {
+        videos[i].style.display = 'none';
+      }
+    }
+  }
+});
+  </script>
+</body>
+</html>
