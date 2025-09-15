@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Prep | Study Portal</title>
+  <script defer src="../script.js"></script>
+    <link rel="stylesheet" href="../Police-Batches/Vinayak.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="placement.css">   
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html"><h2>Study Portal</h2></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../Police-Batches/Police batches.html">Police</a>
+      <a href="../Mba/Mba.html">Mba</a>
+      <a href="coding.html" target="_blank">Back</a>
+      <button id="theme-toggle">🌙</button>
+    </div>
+  </nav>
+
+  <div class="search-container">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"/>
+    </svg>
+    
+    <input type="text" id="search-input" placeholder="Search for lectures by name or number...">
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>💼OOPs Tutorial By Shraddha Khapra</h1>
+    <p>Learn OOPs, Strong your concepts, with detailed lectures and easy access</p>
+  </header>
+
+  <!-- Content Section -->
+  <!-- <section class="button-container">
+    <button class="batch-btn" onclick="location.href='coding.html'">👨‍💻 Coding</button>
+    <button class="batch-btn" onclick="location.href='WebD.html'">👨‍💻 Web Development</button>
+    <button class="batch-btn">📊 Aptitude</button>
+    <button class="batch-btn" onclick="location.href='communication.html'">🗣 Communication</button>
+  </section> -->
+
+  <!-- YouTube Video and Playlist Section -->
+  <div class="main-content-container">
+    
+    <section class="playlist-section">
+      <div class="playlist-sidebar" id="playlist-sidebar">
+        <div class="playlist-header">
+          <h2>Course: OOPs Tutorial By Shraddha Khapra</h2>
+          <button id="togglePlaylistBtn" class="toggle-btn">«</button>
+        </div>
+        <ul id="video-list">
+            <li data-video-id="mlIUKyZIUUU">
+              <div class="video-number">1</div>
+              <img src="https://img.youtube.com/vi/mlIUKyZIUUU/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>One Shot: OOPs Tutorial in One Shot</h4>
+                <p>Object Oriented Programming | in C++ Language | for Placement Interviews</p>
+                <a class="notes-button" href="https://drive.google.com/file/d/1_j7guQZdReJ9GzMdFhqRscXq9rnquBya/view?usp=drive_link" target="_blank">📘 OOPs Notes</a>
+                <a class="notes-button" href="https://drive.google.com/file/d/1-fSUUeI02QdHv5x7SJWVtrMId9BEeYXw/view" target="_blank"> ✍ Mcq Practice</a>
+                
+              </div>
+              
+            </li>
+           
+      </div>
+
+             </ul>
+          
+      </div>
+
+      <div class="video-player" id="video-player-container">
+        <h2>Watch Video</h2>
+        <!-- Initial video player will be loaded here by JavaScript -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Study Portal | Designed by Rohan Kumar</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const playlistItems = document.querySelectorAll('.playlist-sidebar li');
+      const videoPlayerContainer = document.getElementById('video-player-container');
+      const playlistSidebar = document.getElementById('playlist-sidebar');
+      const toggleBtn = document.getElementById('togglePlaylistBtn');
+
+      const playVideo = (videoId) => {
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('width', '150%');
+        iframe.setAttribute('height', '600'); 
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+        iframe.setAttribute('title', 'YouTube video player');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+
+        videoPlayerContainer.innerHTML = '';
+        videoPlayerContainer.appendChild(iframe);
+      };
+
+      const togglePlaylist = () => {
+        const isShrunk = playlistSidebar.classList.toggle('shrunk-playlist');
+        videoPlayerContainer.classList.toggle('full-width', isShrunk);
+
+        toggleBtn.textContent = isShrunk ? '«' : '«';
+      };
+
+      toggleBtn.addEventListener('click', togglePlaylist);
+
+      playlistItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const videoId = item.dataset.videoId;
+          playVideo(videoId);
+          
+        });
+      });
+
+      if (playlistItems.length > 0) {
+        const firstVideoId = playlistItems[0].dataset.videoId;
+        playVideo(firstVideoId);
+      }
+      
+
+      
+    });
+
+    document.getElementById('search-input').addEventListener('keyup', function() {
+  let filter = this.value.toLowerCase();
+  let videoList = document.getElementById('video-list');
+  let videos = videoList.getElementsByTagName('li');
+
+  for (let i = 0; i < videos.length; i++) {
+    let videoInfo = videos[i].getElementsByTagName('h4')[0];
+    let videoNumber = videos[i].querySelector('.video-number');
+
+    if (videoInfo || videoNumber) {
+      let titleText = videoInfo.textContent.toLowerCase();
+      let numberText = videoNumber ? videoNumber.textContent.toLowerCase() : '';
+      
+      if (titleText.includes(filter) || numberText.includes(filter)) {
+        videos[i].style.display = '';
+      } else {
+        videos[i].style.display = 'none';
+      }
+    }
+  }
+});
+  </script>
+</body>
+</html>
