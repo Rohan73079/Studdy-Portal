@@ -14,3 +14,15 @@ toggle.addEventListener("click", () => {
   toggle.textContent = isDark ? "☀️" : "🌙";
   localStorage.setItem("theme", isDark ? "dark" : "light");
 });
+
+
+  // Wait for the page content to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // Select all <details> elements within the playlist sidebar
+    const allDetails = document.querySelectorAll('.playlist-sidebar .playlist-details');
+
+    // Loop through each one and remove the 'open' attribute
+    allDetails.forEach(detail => {
+      detail.removeAttribute('open');
+    });
+  });

@@ -32,6 +32,9 @@
     justify-content: flex-start;
   
     border-right: 1px solid #eee;
+    overflow-y: auto;            /* <-- add this line */
+    -ms-overflow-style: none;    /* IE */
+    scrollbar-width: 10px;
   }
       
       /* Hide scrollbar */
@@ -40,23 +43,23 @@
       }
   
       
-  .playlist-sidebar ul::-webkit-scrollbar {
-    display: none;        /* Chrome, Safari */
-  }
+ 
       
   /* Make the list scrollable */
-  .playlist-sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* space between each video item */
-    overflow-y: auto;
-    flex: 1;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+ /* Make the list scrollable */
+.playlist-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* space between each video item */
+  margin-top: 10px;
+
+  /* YEH LINES ADD KAREIN */
+  overflow-y: auto; /* Scrollbar tab dikhega jab zaroorat ho */
+  max-height: 100%; /* Taaki list sidebar ki poori height le sake */
+}
   /* List items transition */
 .playlist-sidebar ul {
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -68,6 +71,26 @@
     transform: translateX(-20px);
   }
   
+  /* Sidebar ko ek container banata hai */
+.playlist-sidebar {
+  display: flex;
+  flex-direction: column;
+  /* Aapke baaki sidebar styles yahan rahenge... */
+}
+
+/* Naye div ko scrollable banata hai */
+.playlist-content {
+  flex: 1;           /* Yeh bachi hui poori height le lega */
+  overflow-y: auto;  /* Zaroorat padne par ismein scrollbar aayega */
+      counter-reset: playlist-counter; 
+
+}
+.hero {
+  text-align: center;
+  padding-left:300px;
+  
+}
+
       
       .playlist-sidebar li {
         display: flex;
@@ -86,6 +109,17 @@
       .playlist-sidebar li:hover {
         background-color: #211b01;
       }
+
+      .playlist-sidebar details {
+        margin-bottom: 10px;
+        background: #1a1a1a;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+   
+
+      
+      
       
       .video-thumbnail {
         width: 180px;
@@ -173,7 +207,19 @@
         
          /* button must stay clickable */
       }
-  
+      .playlist-header {
+        position: sticky;      /* 👈 add */
+        top: -10px;                /* 👈 add */
+        background-color: inherit; /* 👈 add */
+        z-index: 1;            /* 👈 add */
+      }
+      
+      .playlist-sidebar ul,
+      .playlist-sidebar details {
+        overflow: visible; /* 👈 add */
+        
+      }
+      
       .playlist-sidebar .playlist-header h2 {
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
@@ -194,12 +240,86 @@
   .playlist-header h2{
       color: #ffffff;
   }
+
+  /* Summary Box Styling */
+/* ======================================== */
+/* == MERGED & CLEANED SUMMARY BOX STYLE == */
+/* ======================================== */
+
+/* Summary Box Styling */
+.playlist-summary {
+  display: flex;             /* thumbnail + text side by side */
+  align-items: center;
+  gap: 25px;                 /* Aap isse 5px ya 15px rakh sakte hain */
+  padding: 12px;             /* Aap isse 10px ya 12px rakh sakte hain */
+  background:  #aaa09555;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;         /* Yeh doosre style se liya gaya hai */
+  transition: background 0.3s ease;
+  /* border-left: 5px solid #ffffff; */
+  border-bottom: 2px solid #ffffff; 
+  
+  /* Minimum size set karna */
+  min-height: 150px;
+  min-width: 250px;
+}
+.playlist-summary:hover{
+  background-color: #1f1c24;
+}
+
+.playlist-summary:hover .summary-info h3{
+  /* background: #e1dcdc; */
+  color :#fdf3f3
+}
+.playlist-summary:hover .summary-thumb{
+  box-shadow: 0 2px 5px rgba(228, 223, 223, 0.756);
+  /* color :#fdf3f3 */
+}
+.playlist-summary:hover .summary-info p{
+ 
+  color :#ddc2c2
+}
+
+/* Thumbnail inside summary */
+.summary-thumb {
+  width: 200px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 5px rgba(24, 23, 23, 0.756);
+}
+
+/* Text info inside summary */
+.summary-info h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.summary-info p {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #e4d8d8;
+}
   .playlist-sidebar.shrunk-playlist .toggle-btn {
     transform: rotate(180deg);
     right: 10px;
     font-size: 100px;
   
     
+  }
+
+  .playlist-summary::before {
+    counter-increment: playlist-counter;    /* Har playlist ke liye number 1 se badhata hai */
+    content: counter(playlist-counter);     /* Yahan number dikhata hai */
+  
+    /* --- Number ki Styling --- */
+    font-size: 1.5rem; /* Number ka size */
+    font-weight: 700;  /* Mota (bold) */
+    color: #888;      /* Number ka color */
+    min-width: 20px;   /* Taki 1-digit aur 2-digit numbers align rahein */
+    text-align: center;
   }
       /* Responsive: Desktop */
       @media (min-width: 768px) {
@@ -221,7 +341,7 @@
       }
       
       body.dark .playlist-sidebar li {
-          border-bottom: 2px solid #ffffff;
+          border-top: 2px solid #ffffff;
       }
       
       body.dark .playlist-sidebar li:hover {
@@ -266,61 +386,55 @@
   
   /* Container for the search bar */
   .search-container {
+    margin: 20px auto 0 auto;
     display: flex;
     align-items: center;
-    margin: 30px auto;
-    position: absolute;
-    top: 5%;      /* Aligns the top edge 20px from the top of the window */
-    right: 20px;    /* Aligns the right edge 20px from the right of the window */
-    z-index: 0;
-    
-    width: 75%; /* Sets the width to 95% of its parent container */
-    max-width: 400px; /* Ensures the search box doesn't get too wide on large screens */
-    
-    border: 1px solid #e0e0e0;
-    border-radius: 25px;
-    padding: 8px 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    background-color: #ffffff;
-    transition: all 0.3s ease-in-out;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 999px;       /* fully rounded like YouTube */
+    overflow: hidden;           /* for rounded edges on input/button */
+    background-color: #303030;  /* dark background */
   }
   
-  /* Hover effect for the search container */
-  .search-container:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-  
-  /* Search input field styling */
   #search-input {
-    flex-grow: 1;
+    flex: 1;
+    height: 45px;
+    padding: 0 16px;
+    font-size: 16px;
     border: none;
     outline: none;
-    font-size: 1.1em;
-    padding: 5px 10px;
-    color: #333;
     background-color: transparent;
+    color: #fff;                /* text color */
   }
   
-  /* Placeholder text styling */
   #search-input::placeholder {
-    color: #a0a0a0;
-    font-style: italic;
+    color: #aaa;                /* placeholder color */
   }
   
-  /* Focus effect for the search input */
-  #search-input:focus {
+  .search-btn {
+    width: 56px;
+    height: 40px;
+    background-color: #383838;  /* slightly lighter than input bg */
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
   }
   
-  /* SVG icon styling */
+  .search-btn:hover {
+    background-color: #4a4a4a;
+  }
+  
   .search-icon {
     width: 20px;
     height: 20px;
-    fill: #757575;
-    margin-right: 10px;
+    fill: #fff;                 /* white search icon */
   }
   
-  /* For WebKit-based browsers (Chrome, Safari, Edge) */
+   /* For WebKit-based browsers (Chrome, Safari, Edge) */
   #video-list::-webkit-scrollbar {
     width: 10px; /* Width of the scroll bar */
   }

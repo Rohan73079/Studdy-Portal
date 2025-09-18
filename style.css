@@ -47,7 +47,7 @@
     transition: transform 0.3s ease, opacity 0.3s ease; /* smooth effect */
   display: inline-block; /* important for transform */
   }
-  .navbar a:hover { opacity: 0.8;
+  .navbar a:hover{ opacity: 0.8;
    color: rgb(255, 153, 0);
    transform: scale(1.2); /* 1.2 = 20% zoom */
    text-decoration: underline; /* underline */
@@ -73,8 +73,25 @@
     text-align: center;
     padding: 60px 20px 30px;
   }
-  .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+  .hero h1 { font-size: 2.5rem; margin-bottom: 10px; margin-top: -30px; }
   .hero p { font-size: 1.2rem; }
+
+  /* default expanded sidebar */
+.sidebar {
+  width: 250px;
+  transition: width 0.3s ease;
+}
+
+/* shrunk sidebar */
+.sidebar.shrunk {
+  width: 80px;
+}
+
+/* shift hero content when sidebar shrinks */
+.sidebar.shrunk ~ .hero {
+  padding-left: 100px; /* shifts h1 & p to the right */
+}
+  
   
   .button-container {
     display: grid;
@@ -95,12 +112,14 @@
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0px 10px rgb(215, 156, 88);
+    box-shadow: 0 0px 10px rgb(255, 255, 255);
   }
   .batch-btn:hover {
     background: black;
-    color: #fff;
+    color: #ffffff;
     transform: translateY(-5px);
+    box-shadow: 0 0px 10px rgb(230, 157, 21);
+
   }
   
   .footer {
