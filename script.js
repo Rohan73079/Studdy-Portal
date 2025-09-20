@@ -26,3 +26,4 @@ toggle.addEventListener("click", () => {
       detail.removeAttribute('open');
     });
   });
+
