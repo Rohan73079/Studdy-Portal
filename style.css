@@ -53,6 +53,7 @@
     color: #fff;
     padding: 5px 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
     
 
   }
@@ -125,13 +126,14 @@
     padding: 30px 20px;
     border: none;
     border-radius: 16px;
-    background: linear-gradient(to right,#084252d3, #6788cbd6 );
+    background: linear-gradient(to right,#084252f2, #6788cbd6 );
     color: var(--text);
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 0px 10px rgb(9, 7, 7);
+    z-index: 1;
   }
   .batch-btn:hover {
     background: linear-gradient(to right,#123375d6, #012934d3 );
@@ -140,6 +142,10 @@
     box-shadow: 0 0px 10px rgb(57, 76, 82);
 
   }
+  .batch-btn h6{
+    color: rgba(220, 164, 101, 0.758);
+    align-items: baseline;
+  }
   
   .footer {
     background: linear-gradient(to right,#012934d3, #25427bd6 );
@@ -147,6 +153,7 @@
     text-align: center;
     padding: 7px;
     margin-top: auto;
+    
   }
 
  
