@@ -79,6 +79,93 @@ html, body {
 
 
 
+/* Base reset */
+* { box-sizing: border-box; }
+
+.ai-toggle {
+  position: fixed;
+  bottom: 40px;
+  right: 90px;
+  background: linear-gradient(to right,#333a41d6, #011920d3 );
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 0;
+}
+
+/* Container hidden by default */
+.ai-tools-container {
+  position: fixed;
+  bottom: 90px; /* just above the toggle button */
+  right: 20px;
+  right: 20px;
+
+  display: flex;
+  flex-direction: column; /* stack links vertically */
+  gap: 10px;
+
+  background: #222;
+  border-radius: 20px;
+  padding: 10px;
+
+  overflow-y: auto;       /* scroll if too tall */
+  scrollbar-width: none;  /* Firefox hide scrollbar */
+  -ms-overflow-style: none; /* IE/Edge hide scrollbar */
+
+  max-height: 0;          /* collapsed by default */
+  opacity: 0;
+  transition: all 0.3s ease;
+  width: fit-content;
+  z-index: 1;
+  
+}
+
+/* Optional: hide scrollbar for WebKit browsers */
+.ai-tools-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Expanded state */
+.ai-tools-container.open {
+  max-height: 500px; /* large enough to show all tools */
+  opacity: 1;
+}
+
+
+/* Individual tool button */
+.ai-tools-container .tool {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #444;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 50px;
+  text-decoration: none;
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  width: fit-content;
+}
+.ai-tools-container .tool img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive: hide labels on very small screens */
+@media (max-width: 480px) {
+  .ai-tools-container .tool {
+    padding: 8px;
+  }
+  .ai-tools-container .tool span,
+  .ai-tools-container .tool img + * {
+    display: none; /* hide text, keep icon */
+  }
+}
+
+
+
 </style>
 
 </head>
@@ -124,6 +211,51 @@ html, body {
     <button class="batch-btn" onclick="location.href=''">➕ Other Batches<h6 >Coming soon...</h6></button>
   </section>
 
+
+  
+  <!-- AI Tools Toggle Button -->
+<button class="ai-toggle" id="aiToggle">
+  <span>AI Tools</span>
+</button>
+
+<!-- Expandable container -->
+<div class="ai-tools-container" id="aiTools">
+  <a href="https://chat.openai.com/" target="_blank" class="tool">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg" alt="ChatGPT" width="24" height="24">
+    ChatGPT
+  
+    <a href="https://gemini.google.com/app" target="_blank" class="tool">
+      <img src="../gemini-color.svg" alt="Gemini" width="24" height="24">
+      Gemini
+    </a>
+  
+    <a href="https://copilot.microsoft.com/" target="_blank" class="tool">
+      <img src="copilot-color.svg" alt="Copilot" width="24" height="24">
+      Copilot
+    </a>
+  
+    <a href="https://claude.ai/" target="_blank" class="tool">
+      <img src="claude-color.svg" alt="Claude" width="24" height="24">
+      Claude
+    </a>
+  
+    <a href="https://www.perplexity.ai/" target="_blank" class="tool">
+      <img src="perplexity-color.svg" alt="Perplexity" width="24" height="24">
+      Perplexity
+    </a>
+  
+    <a href="https://chat.deepseek.com/" target="_blank" class="tool">
+      <img src="deepseek-color.svg" alt="DeepSeek" width="24" height="24">
+      DeepSeek
+    </a>
+  
+    <a href="https://www.meta.ai/" target="_blank" class="tool">
+      <img src="metaai-color.svg" alt="Meta AI" width="24" height="24">
+      Meta AI
+    </a>
+  <!-- add more tools here -->
+</div>
+
   <!-- Footer -->
   <footer class="footer">
     <p>© 2025 Study Portal | Designed by  <a href="https://rohanportfolio2807.vercel.app/" style="color: aliceblue;" target="_blank"    onmouseover="this.style.color='orange'" 
@@ -166,6 +298,14 @@ html, body {
   book.style.animation = `fall ${duration}s linear forwards`;
   document.body.appendChild(book);
 }
+
+
+  const aiToggle = document.getElementById('aiToggle');
+  const aiTools = document.getElementById('aiTools');
+
+  aiToggle.addEventListener('click', () => {
+    aiTools.classList.toggle('open');
+  });
 
 
     </script>

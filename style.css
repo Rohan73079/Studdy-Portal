@@ -142,6 +142,21 @@
     box-shadow: 0 0px 10px rgb(57, 76, 82);
 
   }
+  .ai-toggle:hover {
+    background: linear-gradient(to right,#809cd4d6, #011c23d3 );
+    color: #ffffff;
+    transform: translateY(-15%);
+    box-shadow: 0 0px 10px rgb(57, 76, 82);
+    transition: 300ms ease;
+
+  }
+  .ai-tools-container .tool:hover {
+    background: linear-gradient(to right,#373a40d6, #012934d3 );
+    color: #ffffff;
+    /* transform: translateY(-5px); */
+    box-shadow: 0 0px 10px rgb(57, 76, 82);
+
+  }
   .batch-btn h6{
     color: rgba(220, 164, 101, 0.758);
     align-items: baseline;
