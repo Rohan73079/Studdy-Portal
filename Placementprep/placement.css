@@ -14,7 +14,7 @@
       /* Playlist Sidebar */
       /* Playlist Sidebar Full Height */
   .playlist-sidebar {
-    background-color: #352303;
+    background: linear-gradient(to right,#012934d3, #6788cbd6 );
     color: #decbcb;
     border-radius: 10px;
     padding: 10px;
@@ -39,6 +39,10 @@
       
       /* Hide scrollbar */
       .playlist-sidebar::-webkit-scrollbar {
+        display: none;
+      }
+  
+      .playlist-summary::-webkit-scrollbar {
         display: none;
       }
   
@@ -98,7 +102,7 @@
         padding: 12px;
         border-left: 5px solid #ffffff;
         cursor: pointer;
-        background-color: #100a00;
+        background: linear-gradient(to right,#0f4555, #052b30d6 );
         transition: border-color 0.3s ease,  background-color 0.2s ease;
         gap: 15px;
         border-radius: 8px;
@@ -187,13 +191,14 @@
         background-color: transparent;
         color: #ffffff;
         border: none;
-        padding: 8px;
+        padding: 4px;
         cursor: pointer;
         font-size: 50px;
         transition: all 0.3s ease;
         position: absolute;
         top: 20px;
         right: 20px;
+        /* position: fixed; */
       }
       
       /* Shrunk Playlist */
@@ -211,7 +216,7 @@
         position: sticky;      /* 👈 add */
         top: -10px;                /* 👈 add */
         background-color: inherit; /* 👈 add */
-        z-index: 1;            /* 👈 add */
+        z-index: 0;            /* 👈 add */
       }
       
       .playlist-sidebar ul,
@@ -230,15 +235,21 @@
   }
       
       .playlist-sidebar.shrunk-playlist ul,
-  .playlist-sidebar.shrunk-playlist .playlist-header h2 {
-    /* opacity: 0; */
+  .playlist-sidebar.shrunk-playlist  {
+    opacity: 60%;
     /* visibility: hidden; */
     align-items: left;
     
+    
    
+  }
+
+  .shrunk-playlist .playlist-header:hover{
+    color: #000000;
   }
   .playlist-header h2{
       color: #ffffff;
+     
   }
 
   /* Summary Box Styling */
@@ -252,7 +263,7 @@
   align-items: center;
   gap: 25px;                 /* Aap isse 5px ya 15px rakh sakte hain */
   padding: 12px;             /* Aap isse 10px ya 12px rakh sakte hain */
-  background:  #aaa09555;
+  background: linear-gradient(to right,#283c42d3, #5873a9d6 );
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;         /* Yeh doosre style se liya gaya hai */
@@ -306,6 +317,7 @@
     transform: rotate(180deg);
     right: 10px;
     font-size: 100px;
+    
   
     
   }
@@ -335,13 +347,21 @@
       
       /* Dark Mode */
       body.dark .playlist-sidebar {
-        background-color: #222;
+        background: linear-gradient(to right,#001e27d3, #5883dad6 );
+        box-shadow: 0 4px 15px rgba(255,255,255,0.05);
+        transition:  0.3s;
+      }
+       body.dark .playlist-summary  {
+        background: linear-gradient(to right,#014f67d3, #000816d6 );
         box-shadow: 0 4px 15px rgba(255,255,255,0.05);
         transition:  0.3s;
       }
       
+     
       body.dark .playlist-sidebar li {
           border-top: 2px solid #ffffff;
+          background: linear-gradient(to right,#090a0a, #032a2ed6 );
+
       }
       
       body.dark .playlist-sidebar li:hover {
@@ -361,7 +381,7 @@
       }
       
       body.dark .toggle-btn {
-        color: #4da3ff;
+        color: #e6edf4;
       }
   
       ul li {
@@ -472,3 +492,46 @@
     background: #f3f3ef;
     color: #000000;
   }
+
+  
+/* === Medium screens (tablets 768–1023px) === */
+@media (max-width: 1023px) {
+  .sidebar {
+    width: 220px;       /* narrower */
+    height: auto;       /* let it size itself */
+  }
+  .video-player {
+    margin-left: 15px;
+  }
+}
+
+/* === Small screens (phones <768px) === */
+@media (max-width: 767px) {
+  .playlist-section {
+    flex-direction: column;  /* stack vertically */
+  }
+
+  .sidebar {
+    width: 100%;             /* full width */
+    position: relative;      /* no sticky */
+    height: auto;
+    overflow: visible;
+  }
+
+  .video-player {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .video-player iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+}
+
+/* === Ultra small (<480px) optional tweaks === */
+@media (max-width: 480px) {
+  .sidebar {
+    font-size: 14px;         /* smaller text if needed */
+  }
+}

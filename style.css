@@ -1,15 +1,26 @@
 :root {
-    --bg: #f9fbe7;
-    --text: #333;
-    --card: #fff;
+  background: linear-gradient(to right,#012934d3, #6788cbd6 );
+
+    --text: #0e0101;
+    --card: #91b4f1d8;
     --primary: #4CAF50;
+    ;
+    
   }
+ 
   
   body.dark {
-    --bg: #121212;
+    --bg: #001014;
     --text: #e0e0e0;
-    --card: #1e1e1e;
+    --card: #18192bd2;
     --primary: #81c784;
+    
+    background-image: url('Adobe\ Express\ -\ file.png');
+    background-repeat: no-repeat;
+    background-position: right;  /* aligns it at the bottom */
+    background-size: 30%; /* or 'auto' / 'cover' depending on your need */
+    
+
   }
   
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,6 +33,14 @@
     flex-direction: column;
     min-height: 100vh;
     transition: background 0.3s, color 0.3s;
+
+    background-image: url('Adobe\ Express\ -\ file.png');
+    background-repeat: no-repeat;
+    background-position: right;  /* aligns it at the bottom */
+    background-size: 40%; /* or 'auto' / 'cover' depending on your need */
+    
+
+
   }
   
   .navbar {
@@ -30,11 +49,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgb(33, 32, 32);
+    background: linear-gradient(to right, #6788cb, #012934d8);
     color: #fff;
-    padding: 15px 30px;
+    padding: 5px 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 10;
+    
 
   }
   
@@ -48,7 +67,7 @@
   display: inline-block; /* important for transform */
   }
   .navbar a:hover{ opacity: 0.8;
-   color: rgb(255, 153, 0);
+   color: rgb(217, 224, 244);
    transform: scale(1.2); /* 1.2 = 20% zoom */
    text-decoration: underline; /* underline */
 
@@ -59,15 +78,15 @@
   
   #theme-toggle {
     margin-left: 20px;
-    padding: 6px 12px;
+    padding: 10px 10px;
     border: none;
-    border-radius: 50%;
-    background: #fff;
+    border-radius: 80%;
+    background: #021f31;
     color: var(--primary);
     cursor: pointer;
     transition: transform 0.3s;
   }
-  #theme-toggle:hover { transform: rotate(20deg); }
+  #theme-toggle:hover { transform: rotate(180deg); }
   
   .hero {
     text-align: center;
@@ -106,27 +125,74 @@
     padding: 30px 20px;
     border: none;
     border-radius: 16px;
-    background: var(--card);
+    background: linear-gradient(to right,#084252d3, #6788cbd6 );
     color: var(--text);
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0px 10px rgb(255, 255, 255);
+    box-shadow: 0 0px 10px rgb(9, 7, 7);
   }
   .batch-btn:hover {
-    background: black;
+    background: linear-gradient(to right,#123375d6, #012934d3 );
     color: #ffffff;
     transform: translateY(-5px);
-    box-shadow: 0 0px 10px rgb(230, 157, 21);
+    box-shadow: 0 0px 10px rgb(57, 76, 82);
 
   }
   
   .footer {
-    background: #222;
+    background: linear-gradient(to right,#012934d3, #25427bd6 );
     color: #fff;
     text-align: center;
-    padding: 15px;
+    padding: 7px;
     margin-top: auto;
   }
+
+ 
+
+
+
   
+  
+
+  /* Small screen tweaks */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;          /* full width on mobile */
+    position: relative;
+  }
+
+  .sidebar.shrunk ~ .hero {
+    padding-left: 0; /* reset shift on mobile */
+  }
+
+  .button-container {
+    grid-template-columns: 1fr; /* one button per row on mobile */
+  }
+
+  .batch-btn {
+    font-size: 16px;
+    padding: 20px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body, body.dark {
+    background-size: cover; /* or 80% */
+    background-position: center;
+  }
+}
