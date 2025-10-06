@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="../cropped_icon_image.png">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Prep | Study Portal</title>
+  <script defer src="../script.js"></script>
+    <link rel="stylesheet" href="../Police-Batches/Vinayak.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="placement.css">   
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html"><img src="../cropped_icon_image.png" width="50px" height="40px"></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../Police-Batches/Police batches.html">Police</a>
+      <a href="../Mba/Mba.html">Mba</a>
+      <a href="coding.html" target="_blank">Back</a>
+      <button id="theme-toggle">🌙</button>
+    </div>
+  </nav>
+
+  
+
+  <div class="search-container">
+    <input id="search-input" type="text" placeholder="Search">
+    <button class="search-btn">
+      <!-- You can put an SVG or font-awesome icon here -->
+      <svg class="search-icon" viewBox="0 0 24 24">
+        <path d="M21.71 20.29l-3.388-3.388A8.958 8.958 0 0018 9a9 9 0 10-9 9 8.958 8.958 0 007.902-4.678l3.388 3.388a1 1 0 001.414-1.414zM4 9a5 5 0 1110 0A5 5 0 014 9z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>💼OOPs Tutorial By Shraddha Khapra</h1>
+    <p>Learn OOPs, Strong your concepts, with detailed lectures and easy access</p>
+  </header>
+
+  <div class="video-player" id="video-player-container">
+    <h2>Watch Video</h2>
+    <iframe id="video-frame" width="100%" height="500" allowfullscreen></iframe>
+
+    <!-- Initial video player will be loaded here by JavaScript -->
+  </div>
+
+  <!-- Video Player -->
+  <!-- <div class="video-player">
+    <iframe id="video-frame" width="100%" height="500" allowfullscreen></iframe>
+  </div> -->
+
+
+
+  <!-- YouTube Video and Playlist Section -->
+  <div class="main-content-container">
+    
+    <section class="playlist-section">
+      <div class="playlist-sidebar" id="playlist-sidebar">
+        <div class="playlist-header">
+          <h2>Course: Delta 4.0 by Shraddha Khapra           <a href="https://drive.google.com/file/d/11eBmtb7piEPmrcpm-cBiDm3XB5v-U4ry/view?usp=drive_link" class="notes-button" target="_blank">Content</a>
+          </h2>
+          <button id="togglePlaylistBtn" class="toggle-btn">«</button>
+        </div>
+
+
+        <div class="playlist-content">
+
+            <details class="playlist-details" open>
+                <summary class="playlist-summary no-counter">
+                  <!-- <img class="summary-thumb" src="https://s3.ap-south-1.amazonaws.com/rzp-prod-merchant-assets/payment-link/description/delta%20batch-25_nabjfup1qk1gbv.jpeg" alt="Playlist Thumbnail"> -->
+                  <div class="summary-info">
+                    <!-- <h3><span> <h1>Day 1</h1></span>Delta Web Development Playlist </h3> -->
+                     <h1 style="padding-top: 0; " !important>Day 1</h1>
+                    
+
+                    <!-- <p>All lectures from the folder at one place</p> -->
+                  </div>
+                </summary>
+
+            <details class="playlist-details" open>
+              <summary class="playlist-subsummary">
+                <!-- iframe left -->
+                <div>
+                  <iframe src="https://drive.google.com/file/d/1AaHo3VsLZdJKbCwhO-9ZijGfuigRzSpj/preview"
+                          width="100" height="100" allow="autoplay"></iframe>
+                </div>
+              
+                <!-- text right -->
+                <div class="subsummary-info">
+                  <h2>Introduction</h2>
+                  <span>Total video: 4</span>
+                  <p>All lectures from the folder at one place</p>
+                  <a class="notes-button"
+                     href="https://drive.google.com/file/d/1AaHo3VsLZdJKbCwhO-9ZijGfuigRzSpj/view?usp=drive_link"
+                     target="_blank">Topics</a>
+                </div>
+              </summary>
+              
+              
+                <div class="playlist-scroll-wrap">
+                  <ul id="video-list">
+                    <!-- Video 1 -->
+                    <li data-video-id="1oitEH6ViepVBhts4vJqJzCbd2_9eDWf_" data-source="drive">
+                      <div class="video-number">1</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1oitEH6ViepVBhts4vJqJzCbd2_9eDWf_" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>01. Welcome to Delta!</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 2 -->
+                    <li data-video-id="https://jumpshare.com/embed/AdIPrMYcFdezT5NoM4QP" data-source="jumpshare">
+                      <div class="video-number">2</div>
+                      <img src="https://previews.jumpshare.com/thumb/815bc01b796dd6f1733c957c5af194934ba34777c0fb7c15f6fc36de4c768fad0b3263f4047392bd38bba0b69f1e6960a344f295ec52baa9d0c159881e53b6596be283ef8d07df50da12eba2e2c65963e2a24d4919902fa5ca324a11777ac992" 
+                           alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>02. What is the Internet</h4>
+                        <p>Play from Jumpshare</p>
+                      </div>
+                    </li>
+                    
+              
+                    <!-- Video 3 -->
+                    <li data-video-id="1Auuz8rEfj72YQ5zhLigGecZki362TqxY" data-source="drive">
+                      <div class="video-number">3</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1Auuz8rEfj72YQ5zhLigGecZki362TqxY" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>03. What is Web Development</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 4 -->
+                    <li data-video-id="1nXzXTT-Psx33CwufQ6U9BXv-WSINlLFN" data-source="drive">
+                      <div class="video-number">4</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1nXzXTT-Psx33CwufQ6U9BXv-WSINlLFN" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>04. What will we learn</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+
+              <details class="playlist-details" open>
+                <summary class="playlist-subsummary">
+                    
+                      <div>
+                        <iframe src="https://drive.google.com/file/d/1QaT5qyAvNYrlRlBUxHMrMl35wluAAn4n/preview" width="100" height="100" allow="autoplay"></iframe>
+                      </div>
+                      <div class="subsummary-info">
+                        <h2>HTML Basics Playlist</h2>
+                        <span>Total video 7</span>
+                        <p>All HTML lectures at one place</p>
+                        <a class="notes-button" href="https://drive.google.com/file/d/1QaT5qyAvNYrlRlBUxHMrMl35wluAAn4n/view" target="_blank"> Topics</a>
+                      </div>
+                </summary>
+              
+                <div class="playlist-scroll-wrap">
+                  <ul id="video-list">
+                    <!-- Video 1 -->
+                    <li data-video-id="1G33L1z_I2ShujsxgclA8pZYwWH6C310k" data-source="drive">
+                      <div class="video-number">1</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1G33L1z_I2ShujsxgclA8pZYwWH6C310k" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>01. Introduction to HTML</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 2 -->
+                    <li data-video-id="1tTSXH-WK7F9lksyX-QHmRVutVHdsz_l6" data-source="drive">
+                      <div class="video-number">2</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1tTSXH-WK7F9lksyX-QHmRVutVHdsz_l6" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>02. HTML Elements &amp; Tags</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 3 -->
+                    <li data-video-id="1v68He3EEhiTcfCSA1LBUrAHw0GmhAmHF" data-source="drive">
+                      <div class="video-number">3</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1v68He3EEhiTcfCSA1LBUrAHw0GmhAmHF" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>03. Hello World</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 4 -->
+                    <li data-video-id="1wZMZrbb6swa910EEVnMi_IJtuDTzVGHk" data-source="drive">
+                      <div class="video-number">4</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1wZMZrbb6swa910EEVnMi_IJtuDTzVGHk" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>04. Paragraph Element</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 5 -->
+                    <li data-video-id="1O_TD_0-a2fzgl-4_XIaA0ly8_WRxEViv" data-source="drive">
+                      <div class="video-number">5</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1O_TD_0-a2fzgl-4_XIaA0ly8_WRxEViv" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>05. Heading Elements</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 6 -->
+                    <li data-video-id="1WgiHz25G-MkAVIYc6GJvvg6YBq-eFcDd" data-source="drive">
+                      <div class="video-number">6</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1WgiHz25G-MkAVIYc6GJvvg6YBq-eFcDd" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>06. Practice Qs</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+              
+                    <!-- Video 7 -->
+                    <li data-video-id="1C5Kp21vFaQqf0pWoLJLQkgdaCjHsgTr5" data-source="drive">
+                      <div class="video-number">7</div>
+                      <img src="https://drive.google.com/thumbnail?sz=w320&id=1C5Kp21vFaQqf0pWoLJLQkgdaCjHsgTr5" alt="Video Thumbnail" class="video-thumbnail">
+                      <div class="video-info">
+                        <h4>07. Boilerplate Code</h4>
+                        <p>Play from Google Drive</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </details>
+              
+            </details>
+              
+              
+            
+          
+        
+          
+            <ul id="video-list">
+            <li data-video-id="tjZJ0LEqF5g">
+              <div class="video-number">2</div>
+              <img src="https://img.youtube.com/vi/tjZJ0LEqF5g/hqdefault.jpg" alt="Video Thumbnail" class="video-thumbnail">
+              <div class="video-info">
+                <h4>Testing</h4>
+                <p>Only for testing purpose</p>
+                <a class="notes-button" href="https://drive.google.com/file/d/1_j7guQZdReJ9GzMdFhqRscXq9rnquBya/view?usp=drive_link" target="_blank">📘 OOPs Notes</a>
+                <a class="notes-button" href="https://drive.google.com/file/d/1-fSUUeI02QdHv5x7SJWVtrMId9BEeYXw/view" target="_blank"> ✍ Mcq Practice</a>
+                
+              </div>
+              
+            </li>
+
+             </ul>
+          
+      </div>
+      
+
+     
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Study Portal | Designed by Rohan Kumar</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const playlistItems = document.querySelectorAll('.playlist-sidebar li');
+      const videoPlayerContainer = document.getElementById('video-player-container');
+      const playlistSidebar = document.getElementById('playlist-sidebar');
+      const toggleBtn = document.getElementById('togglePlaylistBtn');
+
+
+      const togglePlaylist = () => {
+        const isShrunk = playlistSidebar.classList.toggle('shrunk-playlist');
+        videoPlayerContainer.classList.toggle('full-width', isShrunk);
+
+        toggleBtn.textContent = isShrunk ? '«' : '«';
+      };
+
+      toggleBtn.addEventListener('click', togglePlaylist);
+
+      playlistItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const videoId = item.dataset.videoId;
+          playVideo(videoId);
+          
+        });
+      });
+
+      if (playlistItems.length > 0) {
+        const firstVideoId = playlistItems[0].dataset.videoId;
+        playVideo(firstVideoId);
+      }
+      
+
+      
+    });
+
+    document.getElementById('search-input').addEventListener('keyup', function() {
+  let filter = this.value.toLowerCase();
+  let videoList = document.getElementById('video-list');
+  let videos = videoList.getElementsByTagName('li');
+
+  for (let i = 0; i < videos.length; i++) {
+    let videoInfo = videos[i].getElementsByTagName('h4')[0];
+    let videoNumber = videos[i].querySelector('.video-number');
+
+    if (videoInfo || videoNumber) {
+      let titleText = videoInfo.textContent.toLowerCase();
+      let numberText = videoNumber ? videoNumber.textContent.toLowerCase() : '';
+      
+      if (titleText.includes(filter) || numberText.includes(filter)) {
+        videos[i].style.display = '';
+      } else {
+        videos[i].style.display = 'none';
+      }
+    }
+  }
+});
+
+
+
+// i frame video player script
+
+document.addEventListener("DOMContentLoaded", function() {
+          // Toggle sidebar
+          const toggleBtn = document.getElementById('togglePlaylistBtn');
+          const sidebar = document.getElementById('playlist-sidebar');
+          toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+          });
+        
+          // Switch video on click
+          document.querySelectorAll('#video-list li').forEach(li => {
+            li.addEventListener('click', () => {
+              const fileId = li.getAttribute('data-video-id');
+              const source = li.getAttribute('data-source');
+              const frame = document.getElementById('video-frame');
+        
+              if (source === 'drive') {
+                frame.src = `https://drive.google.com/file/d/${fileId}/preview`;
+              } else {
+                frame.src = `https://www.youtube.com/embed/${fileId}`;
+              }
+            });
+          });
+        
+          // Load first video automatically
+          const firstLi = document.querySelector('#video-list li');
+          if (firstLi) firstLi.click();
+        });
+
+        document.querySelectorAll('#video-list li').forEach(li => {
+  li.addEventListener('click', () => {
+    const src = li.dataset.videoId;
+    document.getElementById('js_video_iframe').src = src;
+  });
+});
+
+  </script>
+</body>
+</html>

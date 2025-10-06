@@ -261,8 +261,9 @@
 .playlist-summary {
   display: flex;             /* thumbnail + text side by side */
   align-items: center;
-  gap: 25px;                 /* Aap isse 5px ya 15px rakh sakte hain */
-  padding: 12px;             /* Aap isse 10px ya 12px rakh sakte hain */
+  gap: 0px;                 /* Aap isse 5px ya 15px rakh sakte hain */
+  padding-left: 10px;             /* Aap isse 10px ya 12px rakh sakte hain */
+  /* padding-bottom: 10px;   */
   background: linear-gradient(to right,#283c42d3, #5873a9d6 );
   border-radius: 10px;
   cursor: pointer;
@@ -270,16 +271,17 @@
   transition: background 0.3s ease;
   /* border-left: 5px solid #ffffff; */
   border-bottom: 2px solid #ffffff; 
+
   
   /* Minimum size set karna */
-  min-height: 150px;
-  min-width: 250px;
+  /* min-height: 150px;
+  min-width: 250px; */
 }
 .playlist-summary:hover{
   background-color: #1f1c24;
 }
 
-.playlist-summary:hover .summary-info h3{
+.playlist-summary:hover .summary-info h3 {
   /* background: #e1dcdc; */
   color :#fdf3f3
 }
@@ -290,6 +292,9 @@
 .playlist-summary:hover .summary-info p{
  
   color :#ddc2c2
+}
+.summary-info h1{
+     padding-top: 0;
 }
 
 /* Thumbnail inside summary */
@@ -302,7 +307,7 @@
 }
 
 /* Text info inside summary */
-.summary-info h3 {
+.summary-info h3  {
   margin: 0;
   font-size: 16px;
   color: #ffffff;
@@ -313,6 +318,97 @@
   font-size: 13px;
   color: #e4d8d8;
 }
+
+
+/* SubSummary Box Styling */
+.playlist-subsummary {
+  display: flex;             /* thumbnail + text side by side */
+  align-items: center;
+  gap: 5px;                 /* Aap isse 5px ya 15px rakh sakte hain */
+  padding: 8px;             /* Aap isse 10px ya 12px rakh sakte hain */
+  background: linear-gradient(to right,#021d25d3, #1d9185d6 );
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;         /* Yeh doosre style se liya gaya hai */
+  transition: background 0.3s ease;
+  /* border-left: 5px solid #ffffff; */
+  border-bottom: 2px solid #ffffff; 
+  margin-top: 10px;
+  margin-left: 10px;
+
+  /* Minimum size set karna */
+  min-height: 50px;
+  min-width: 150px;
+}
+
+/* .video-frame2{
+  display: flex;
+  justify-content: end;
+  align-items: end;
+} */
+.playlist-subsummary:hover{
+  background-color: #1f1c24;
+}
+
+.playlist-subsummary:hover .subsummary-info h3{
+  /* background: #e1dcdc; */
+  color :#fdf3f3
+}
+.playlist-subsummary:hover .subsummary-thumb{
+  box-shadow: 0 2px 5px rgba(228, 223, 223, 0.756);
+  /* color :#fdf3f3 */
+}
+.playlist-subsummary:hover .subsummary-info p{
+ 
+  color :#ddc2c2
+}
+
+/* Thumbnail inside summary */
+.subsummary-thumb {
+  width: 200px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 5px rgba(24, 23, 23, 0.756);
+}
+
+/* Text info inside summary */
+.subsummary-info h2 {
+  margin-bottom: 0px;
+ font-size: 20px;
+  color: #ffffff;
+}
+.subsummary-info h3 {
+  /* margin: 10px; */
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.subsummary-info p {
+  margin: 4px 0 0 0;
+  font-size: 10px;
+  color: #e4d8d8;
+}
+
+.playlist-subsummary span {
+  display: block;
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: 4px;
+}
+
+  .playlist-subsummary::before {
+    counter-increment: playlist-counter;    
+    content: counter(playlist-counter);     
+  
+    /* --- Number ki Styling --- */
+    font-size: 1.5rem; /*Number ka size*/
+    font-weight: 700;  /*Mota (bold)*/
+    color: #888;      /*Number ka color*/
+    min-width: 20px;   /*Taki 1-digit aur 2-digit numbers align rahein*/
+    text-align: left;
+  }
+
   .playlist-sidebar.shrunk-playlist .toggle-btn {
     transform: rotate(180deg);
     right: 10px;
@@ -322,17 +418,21 @@
     
   }
 
-  .playlist-summary::before {
-    counter-increment: playlist-counter;    /* Har playlist ke liye number 1 se badhata hai */
-    content: counter(playlist-counter);     /* Yahan number dikhata hai */
-  
-    /* --- Number ki Styling --- */
-    font-size: 1.5rem; /* Number ka size */
-    font-weight: 700;  /* Mota (bold) */
-    color: #888;      /* Number ka color */
-    min-width: 20px;   /* Taki 1-digit aur 2-digit numbers align rahein */
+
+
+
+  .playlist-summary:not(.no-counter)::before {
+    counter-increment: playlist-counter;
+    content: counter(playlist-counter);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #888;
+    min-width: 20px;
     text-align: center;
   }
+  
+
+
       /* Responsive: Desktop */
       @media (min-width: 768px) {
         .playlist-section {

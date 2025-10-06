@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="../cropped_icon_image.png">
+
+    <script defer src="../script.js"></script>
+    <!-- <link rel="stylesheet" href="../Police-Batches/Vinayak.css"> -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Placementprep/placement.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjects Navigation</title>
+  <style>
+
+    
+        /* Responsive transition to row layout */
+        @media (min-width: 640px) {
+            .top-row {
+                flex-direction: row; /* sm:flex-row */
+            }
+        }
+
+        /* General Card Styling */
+        .card {
+            flex: 1;
+            background-color: white;
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-2xl */
+            border-bottom-width: 4px; /* border-b-4 */
+            transition: all 0.3s ease;
+        }
+
+        .card-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* text-gray-800 */
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+
+        .card-desc {
+            font-size: 0.875rem; /* text-sm */
+            color: #6b7280; /* text-gray-500 */
+        }
+
+        /* Syllabus Card Styling */
+        #syllabus-container {
+            border-bottom-color: var(--primary-blue);
+        }
+        #syllabus-container .card-title svg {
+            color: var(--primary-blue);
+        }
+        #syllabus-container button {
+            margin-top: 1rem;
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s;
+        }
+        #syllabus-container button:hover {
+            background-color: #3b5cb8; /* Darker blue */
+        }
+
+        /* Topic Card Styling (Interactive) */
+        #topic-container {
+            border-bottom-color: #d1d5db; /* border-gray-300 */
+            cursor: pointer;
+            width: 20%;
+            
+        }
+        #topic-container .card-title svg {
+            color: var(--green-color);
+        }
+        #topic-container:hover {
+            border-bottom-color: var(--green-color);
+            transform: scale(1.02);
+        }
+
+        .expand-details {
+            margin-top: 1rem;
+            text-align: center;
+            color: var(--primary-blue);
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .expand-details svg {
+            transition: transform 0.5s;
+        }
+        .expand-details span {
+            margin-left: 0.5rem;
+        }
+
+
+        /* Dropdown Content (CSS Transition Logic) */
+        #topic-details {
+            background-color: rgb(0, 2, 5);
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+            border-top: 2px dashed #d1d5db; /* border-t-2 border-dashed border-gray-300 */
+            
+            /* Initial state: collapsed */
+            max-height: 0;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            
+                    
+        }
+        #topic-details.open {
+            /* Final state: expanded */
+            max-height: 500px; /* Sufficient height to show content */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            transition: max-height 0.75s ease-in, padding 0.75s ease-in;
+            overflow-y: auto;
+        }
+
+        .topic-list-title {
+            font-size: 3.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            color: #e3e8f0; /* text-gray-800 */
+            margin-bottom: 2rem; /* mb-4 */
+            /* display: inline; */
+            justify-content: center;
+            padding-left: 30%;
+        }
+
+        .topic-item {
+            padding: 0.75rem; /* p-3 */
+            background-color: var(--secondary-gray);
+            border-radius: 0.5rem; /* rounded-lg */
+            display: flex;
+            align-items: flex-start;
+            transition: background-color 0.2s;
+            list-style: none; /* Remove default list style */
+            margin-bottom: 0.75rem;
+        }
+        .topic-item:hover {
+            background-color: #1e2735; /* hover:bg-gray-200 */
+        }
+        .topic-item-number {
+            color: #10b981; /* text-green-600 */
+            font-weight: 600; /* font-semibold */
+            margin-right: 0.75rem;
+        }
+
+        .topic-item-content h2:first-child {
+            font-weight: 500; /* font-medium */
+            color: #c5d1e3; /* text-gray-800 */
+            display: inline-block;
+        }
+        .topic-item-content p {
+            font-size: 0.875rem; /* text-sm */
+            color: #babec4; /* text-gray-500 */
+            display: inline;
+            align-items: center;
+            gap: 20px;
+        }
+        .topic-list {
+            padding: 0;
+        }
+     .notes-button {
+    display: flex;
+    width: 50%;
+    margin-top: 8px;
+    margin-left: 25%;
+    padding: 8px 15px;
+    background: #433902;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+  }
+
+  .notes-button:hover {
+    background: #f3f3ef;
+    color: #000000;
+  }
+     .list-notes-button {
+        display: inline-block;   /* make it behave like normal button */
+  min-width: 120px;
+  padding: 8px 15px;
+  background: #ded7ad8a;
+  color: #150202;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+  text-align: center;
+  }
+
+  .list-notes-button:hover {
+    background: #f3f3ef;
+    color: #000000;
+    cursor: pointer;
+  }
+
+  .button-container{
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 2px;
+    min-width: 50%px;
+    display: flex;
+    justify-content: center;   /* centers them horizontally */
+  
+  }
+   
+  
+   
+  .subject-card {
+    background: linear-gradient(to right,#012029d3, #122956d6 );
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 0px 4px 6px rgb(0, 0, 0);
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgb(11, 1, 24);
+    width: 30%;
+    
+
+  }
+  
+  .subject-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 12px rgba(56, 161, 164, 0.381);
+    background: rgb(2, 23, 49);
+    color: #fff;
+  }
+  
+  .subject-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .subject-card p {
+    
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: white;
+  }
+  
+  /* ✅ Help Box */
+  .help-box {
+  position: fixed;
+  bottom: 20px;   /* distance from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0;
+}
+  .help-box a {
+    display: inline-block;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+  }
+  .help-box a:hover {
+    background:  white;
+    color:#333 ;
+  }
+
+  
+  .not-found {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  </style>
+</head>
+<body>
+    <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html"><img src="../cropped_icon_image.png" width="50px" height="40px"></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="https://rohan-dev-portfolio-pink.vercel.app/" target="_blank">About</a>
+      <a href="https://rohan-dev-portfolio-pink.vercel.app/contact.html" target="_blank">Contact</a>
+      <a href="Police batches.html" target="_blank">Back</a>
+      <button id="theme-toggle">🌙</button>
+      <!-- <button class="back-button" onclick="location.href='../index.html'">⬅ Back</button> -->
+    </div>
+  </nav>
+    
+  <!-- Back Button -->
+ 
+<main>
+  <!-- Banner Image -->
+  <!-- <img class="banner" src="https://appx-content-v2.classx.co.in/paid_course3/2025-04-10-0.6126358571668598.jpeg" alt="UPSI Banner">
+
+  <h1>UPSI 2025 ( विनायक 2.0 बैच )</h1>
+  <h2>Choose Your Subject</h2> -->
+
+  <div class="button-container">
+    <!-- Syllabus -->
+    <div class="subject-card" onclick="location.href='https://t.me/c/2735859480/4'">
+      <img src="https://www.shutterstock.com/image-photo/syllabus-word-on-white-sheet-260nw-2018516813.jpg" alt="Syllabus">
+      <a class="notes-button" href="https://t.me/c/2735859480/123" target="_blank">📘 Syllabus pdf</a>
+
+      <p>Syllabus</p>
+    </div>
+    <div class=""subject-card>
+      <a href="https://t.me/c/2735859480/164" class="list-notes-button">Full Class Notes</a>
+
+    </div>
+    <div  class="subject-card" onclick="toggleTopicDetails()">
+        <img src="https://thumbs.dreamstime.com/b/topics-word-handwritten-isolated-vintage-blackboard-39798319.jpg" alt="Topic">
+        <p class="card-desc">Tap to view the list of detailed sub-topics and lecture items.</p>
+        <div class="expand-details">
+            <span id="expand-icon">
+                 <!-- Initial down arrow -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+            <span>VIEW DETAILS</span>
+        </div>
+    </div>
+  </div>
+ 
+  
+ 
+  
+
+
+</div>
+
+<!-- Dropdown Content: List of Items (Opens below both) -->
+
+
+<div id="topic-details">
+  <div class="search-container">
+    <input id="search-input" type="text" placeholder="Search">
+    <button class="search-btn">
+      <!-- You can put an SVG or font-awesome icon here -->
+      <svg class="search-icon" viewBox="0 0 24 24">
+        <path d="M21.71 20.29l-3.388-3.388A8.958 8.958 0 0018 9a9 9 0 10-9 9 8.958 8.958 0 007.902-4.678l3.388 3.388a1 1 0 001.414-1.414zM4 9a5 5 0 1110 0A5 5 0 014 9z"></path>
+      </svg>
+    </button>
+  </div>
+<div class="p-4 sm:p-6">
+    <h3 class="topic-list-title">Detailed Topic Breakdown</h3>
+    <ul class="topic-list" id="video-list">
+        <li class="topic-item">
+          <span class="topic-item-number">01.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/5" target="_blank" style="text-decoration:none; color:inherit;">
+                      Distance and Direction
+                    </a>
+                </h2>
+                
+                <p>Total video: 6</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/143"> Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">02.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/11" target="_blank" style="text-decoration:none; color:inherit;">
+                      Dice
+                    </a>
+                </h2>
+                
+                <p>Total video: 6</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/158"> Open Dice Pdf</button> 
+                <button class="list-notes-button" href="https://t.me/c/2735859480/127"> Simple Dice Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">03.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/17" target="_blank" style="text-decoration:none; color:inherit;">
+                      Cube and Cuboid
+                    </a>
+                </h2>
+                
+                <p>Total video: 5</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/128">Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">04.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/22" target="_blank" style="text-decoration:none; color:inherit;">
+                      Venn Diagram
+                    </a>
+                </h2>
+                
+                <p>Total video: 5</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/155">Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">05.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/26" target="_blank" style="text-decoration:none; color:inherit;">
+                      Coded equations
+                    </a>
+                </h2>
+                
+                <p>Total video: 1</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/126">Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">06.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/27" target="_blank" style="text-decoration:none; color:inherit;">
+                      Counting of Figures
+                    </a>
+                </h2>
+                
+                <p>Total video: 5</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/129">Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">07.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/32" target="_blank" style="text-decoration:none; color:inherit;">
+                      Coding decoding
+                    </a>
+                </h2>
+                
+                <p>Total video: 7</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/135">Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">08.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/39" target="_blank" style="text-decoration:none; color:inherit;">
+                      Letter Series
+                    </a>
+                </h2>
+                
+                <p>Total video: 2</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/137">Pdf</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">09.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/41" target="_blank" style="text-decoration:none; color:inherit;">
+                      Dictionary
+                    </a>
+                </h2>
+                
+                <p>Total video: 1</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/172">Pdf 1</button> 
+                <button class="list-notes-button" href="https://t.me/c/2735859480/140">Pdf 2</button> 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">10.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/42" target="_blank" style="text-decoration:none; color:inherit;">
+                    Pair Formation
+                    </a>
+                </h2>
+                
+                <p>Total video: 1</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/136">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">11.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/43" target="_blank" style="text-decoration:none; color:inherit;">
+                      Alphabetic Series
+                    </a>
+                </h2>
+                
+                <p>Total video: 5</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/138">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">12.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/48" target="_blank" style="text-decoration:none; color:inherit;">
+                      Inequalities
+                    </a>
+                </h2>
+                
+                <p>Total video: 3</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/156">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">13.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/156" target="_blank" style="text-decoration:none; color:inherit;">
+                     Blood Relation
+                    </a>
+                </h2>
+                
+                <p>Total video: 6</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/130">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">14.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/57" target="_blank" style="text-decoration:none; color:inherit;">
+                     Ranking
+                    </a>
+                </h2>
+                
+                <p>Total video: 4</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/152">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">15.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/61" target="_blank" style="text-decoration:none; color:inherit;">
+                        Calendar
+                    </a>
+                </h2>
+                
+                <p>Total video: 7</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/131">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">16.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/68" target="_blank" style="text-decoration:none; color:inherit;">
+                        Clock
+                    </a>
+                </h2>
+                
+                <p>Total video: 8</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/132">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">17.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/76" target="_blank" style="text-decoration:none; color:inherit;">
+                     Number Series
+                    </a>
+                </h2>
+                
+                <p>Total video: 2</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/142">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">18.</span>
+            <div class="topic-item-content">
+                <h2> &nbsp;
+                  <ul>
+                   
+                    <li>
+                    <a href="https://t.me/c/2735859480/78" target="_blank" style="text-decoration:none; color:inherit;">
+                     Missing Numbers
+                     <button class="list-notes-button" href="https://t.me/c/2735859480/134">Missing number Pdf </button> 
+
+                    </a><br></li>
+                    <li>
+                    <a href="https://t.me/c/2735859480/79" target="_blank" style="text-decoration:none; color:inherit;">
+                     Odd One out
+                     <button class="list-notes-button" href="https://t.me/c/2735859480/125">Odd one Out Pdf </button> 
+
+                    </a><br></li>
+                    <li>
+                    <a href="https://t.me/c/2735859480/80" target="_blank" style="text-decoration:none; color:inherit;">
+                     Analogy
+                     <button class="list-notes-button" href="https://t.me/c/2735859480/133">Analogy Pdf </button> 
+                    </a></li>
+                  </ul>
+                </h2>
+                
+                <p>Total video: 1 each</p>
+
+
+
+
+               
+                 
+            </div>
+            
+        </li>
+
+        <li class="topic-item">
+          <span class="topic-item-number">19.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/81" target="_blank" style="text-decoration:none; color:inherit;">
+                     Syllogism
+                    </a>
+                </h2>
+                
+                <p>Total video: 11</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/144">Pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">20.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/92" target="_blank" style="text-decoration:none; color:inherit;">
+                     Sitting Arrangement
+                    </a>
+                </h2>
+                
+                <p>Total video: 5</p>
+                <button class="list-notes-button" href="">No pdf</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">21.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/97" target="_blank" style="text-decoration:none; color:inherit;">
+                      Machine input
+                    </a>
+                </h2>
+                
+                <p>Total video: 5</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/157">pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">22.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/102" target="_blank" style="text-decoration:none; color:inherit;">
+                      Non Verbal
+                    </a>
+                </h2>
+                
+                <p>Total video: 6</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/163">pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">23.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/108" target="_blank" style="text-decoration:none; color:inherit;">
+                    Statement & Assumption
+                    </a>
+                </h2>
+                
+                <p>Total video: 6</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/151">pdf 1</button> 
+                <button class="list-notes-button" href="https://t.me/c/2735859480/149">pdf 2</button> 
+                <button class="list-notes-button" href="https://t.me/c/2735859480/148">pdf 3</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">24.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/114" target="_blank" style="text-decoration:none; color:inherit;">
+                    Reason & Assumption
+                    </a>
+                </h2>
+                
+                <p>Total video: 1</p>
+                <button class="list-notes-button" href="">No pdf</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">25.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/115" target="_blank" style="text-decoration:none; color:inherit;">
+                    Decision Making
+                    </a>
+                </h2>
+                
+                <p>Total video: 1</p>
+                <button class="list-notes-button" href="https://t.me/c/2735859480/145">pdf 1</button> 
+                 
+            </div>
+            
+        </li>
+        <li class="topic-item">
+          <span class="topic-item-number">26.</span>
+            <div class="topic-item-content">
+                <h2>
+                    <a href="https://t.me/c/2735859480/116" target="_blank" style="text-decoration:none; color:inherit;">
+                    Puzzle
+                    </a>
+                </h2>
+                
+                <p>Total video: 7</p>
+                
+                <button class="list-notes-button" href="https://t.me/c/2735859480/165">pdf 1</button> 
+                <button class="list-notes-button" href="https://t.me/c/2735859480/154">Main pdf</button> 
+
+                <button class="list-notes-button" href="https://t.me/c/2735859480/166">pdf 2</button> 
+                 
+            </div>
+            
+        </li>
+        
+    </ul>
+     <!-- Not found message -->
+     <div id="not-found" class="not-found">🙃 No results found</div>
+</div>
+</div>
+
+</div>
+
+<!-- JavaScript logic -->
+<script>
+/**
+* Toggles the visibility and applies CSS transition classes to the topic details section.
+*/
+function toggleTopicDetails() {
+const details = document.getElementById('topic-details');
+const container = document.getElementById('topic-container');
+const iconContainer = document.getElementById('expand-icon');
+
+// Toggle the 'open' class for the slide-down effect
+details.classList.toggle('open');
+
+// Change the border color and icon based on the state
+if (details.classList.contains('open')) {
+    // Expanded state
+    container.style.borderBottomColor = 'var(--green-color)';
+    
+    // Change icon to an 'up' arrow (rotate 180 degrees)
+    iconContainer.innerHTML = '<svg class="w-5 h-5" style="transform: rotate(180deg); transition: transform 0.5s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>';
+} else {
+    // Collapsed state
+    container.style.borderBottomColor = '#d1d5db'; // Reset to gray
+    
+    // Change icon back to a 'down' arrow
+    iconContainer.innerHTML = '<svg class="w-5 h-5" style="transition: transform 0.5s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>';
+}
+}
+
+function searchTopics() {
+  let input = document.getElementById('search-input');
+  let filter = input.value.toLowerCase();
+  let videoList = document.getElementById('video-list');
+  let videos = videoList.getElementsByTagName('li');
+  let found = false;
+
+  for (let i = 0; i < videos.length; i++) {
+    let videoInfo = videos[i].getElementsByTagName('h2')[0]; 
+    let videoNumber = videos[i].querySelector('.topic-item-number'); 
+
+    if (videoInfo || videoNumber) {
+      let titleText = videoInfo ? videoInfo.textContent.toLowerCase() : '';
+      let numberText = videoNumber ? videoNumber.textContent.toLowerCase() : '';
+      
+      if (titleText.includes(filter) || numberText.includes(filter)) {
+        videos[i].style.display = '';
+        found = true;
+      } else {
+        videos[i].style.display = 'none';
+      }
+    }
+  }
+
+  // Show or hide not found message
+  document.getElementById('not-found').style.display = found ? 'none' : 'block';
+}
+
+// Run on typing
+document.getElementById('search-input').addEventListener('keyup', searchTopics);
+
+// Run when clicking search button
+document.querySelector('.search-btn').addEventListener('click', searchTopics);
+
+// Run when pressing Enter
+document.getElementById('search-input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    searchTopics();
+  }
+});
+</script>
+ <!-- Help Box -->
+ <div class="help-box">
+    <a href="https://telegram.me/+fsbyk6keLIFhY2Q9" >📢 If lecture not opens then join the channel first</a>
+  </div>
+
+ 
+</main>
+
+
+</body>
+</html>
